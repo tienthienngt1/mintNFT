@@ -55,15 +55,6 @@ const Footer = () => {
 					</Typography>
 				</Stack>
 			</Box>
-			<footer>
-				<div className="clouds">
-					<img src="/cloud1.png" />
-					<img src="/cloud2.png" />
-					<img src="/cloud3.png" />
-					<img src="/cloud4.png" />
-					<img src="/cloud5.png" />
-				</div>
-			</footer>
 		</>
 	);
 };

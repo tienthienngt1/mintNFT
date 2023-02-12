@@ -11,9 +11,10 @@ const Mint = () => {
 			<Stack direction="row" justifyContent={"center"}>
 				<Stack
 					direction={{ md: "row", xs: "column-reverse" }}
-					spacing={2}
+					spacing={4}
 					justifyContent="space-around"
-					p={5}
+					alignItems={"center"}
+					p={2}
 					my={5}
 				>
 					<MainMint setStatus={setStatus} status={status} />

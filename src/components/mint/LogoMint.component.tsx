@@ -4,7 +4,7 @@ const LogoMint = () => {
 	return (
 		<Paper
 			sx={{
-				width: { lg: 620, md: 420, xs: 370 },
+				width: { lg: 570, md: 470, xs: 400 },
 				padding: 1,
 				display: "flex",
 				justifyContent: "center",
@@ -16,7 +16,7 @@ const LogoMint = () => {
 			<Box
 				component={"img"}
 				src={"/logo1.jpg"}
-				width={{ lg: 600, md: 400, xs: 350 }}
+				width={{ lg: 550, md: 450, xs: 380 }}
 				alt="logo1_mint"
 				sx={{ borderRadius: 5 }}
 			/>

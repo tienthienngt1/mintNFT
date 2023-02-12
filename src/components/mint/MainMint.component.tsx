@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	Avatar,
 	Box,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { connectWallet } from "func/connectWallet";
 import { Address } from "layout/index.layout";
-import { mint } from "func/getInfoNft";
+import { getTotalSupply, mint } from "func/getInfoNft";
 import Notify from "components/commons/Nofity.component";
 
 type MainMintT = {
@@ -22,11 +22,14 @@ type MainMintT = {
 const MainMint = ({ setStatus, status }: MainMintT) => {
 	const { address, setAddress } = useContext(Address);
 	const [amount, setAmount] = useState<string | undefined>("");
+	const [totalSupply, setTotalSupply] = useState<string | undefined>("");
+
 	const [notify, setNotify] = useState<{
 		display: boolean;
 		text: string;
 		severity: "error" | "success";
 	}>({ display: false, text: "", severity: "error" });
+
 	const handleConnect = async () => {
 		const res = await connectWallet();
 		if (res && setAddress) setAddress(res);
@@ -44,10 +47,20 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 				text: res?.status ? "Mint successfull" : "Error",
 				severity: res?.status ? "success" : "error",
 			});
+			setAmount("");
 		}
 	};
 
 	const handleCloseNotify = () => setNotify({ ...notify, display: false });
+
+	//get totalSupply
+	useEffect(() => {
+		const func = async () => {
+			const res = await getTotalSupply();
+			setTotalSupply(res);
+		};
+		func();
+	}, []);
 
 	return (
 		<>
@@ -58,11 +71,11 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 					background:
 						"linear-gradient(135deg, #5976f5 0%, #fc5347 100%)",
 				}}
-				width={{ lg: 600, md: 400, xs: 350 }}
+				width={{ lg: 570, md: 470, xs: 400 }}
 			>
 				<Typography
 					sx={{
-						typography: { md: "h3", xs: "h5" },
+						typography: { lg: "h3", md: "h4", xs: "h5" },
 						fontWeight: "bold",
 					}}
 					gutterBottom
@@ -88,7 +101,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 						Total: 2000NFTs
 					</Typography>
 				</Stack>
-				<Box sx={{ width: "100%", my: 7 }}>
+				<Box sx={{ width: "100%", my: { lg: 5, md: 3 } }}>
 					<div style={{ position: "relative", marginBottom: 5 }}>
 						<LinearProgress
 							variant="determinate"
@@ -104,16 +117,21 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 								color: "rgb(0,0,0,0.6)",
 								top: 0,
 								fontSize: 13,
-								right: "35%",
+								right: "25%",
 							}}
 						>
-							{`100%	(0/2000)`}
+							{`${((Number(totalSupply) / 2000) * 100).toFixed(
+								1
+							)}%	(${totalSupply}/2000)`}
 						</span>
 					</div>
 					<Typography>Total Minted</Typography>
 				</Box>
+				<Typography color={"rgb(0,0,0,0.6)"}>
+					Price: <span>0.005 ETH</span>
+				</Typography>
 				<TextField
-					label="Price"
+					label="Amount"
 					id="outlined-start-adornment"
 					sx={{ my: 1, width: "100%" }}
 					focused
@@ -122,11 +140,6 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 					InputProps={{
 						startAdornment: (
 							<InputAdornment position="start">
-								<span
-									style={{ color: "#2a252c", fontSize: 20 }}
-								>
-									0.005 ETH
-								</span>
 								<span
 									style={{
 										marginLeft: 10,
@@ -143,7 +156,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 				<Stack
 					direction="row"
 					justifyContent={"center"}
-					sx={{ marginTop: 10 }}
+					sx={{ marginTop: { lg: 10, md: 3 } }}
 				>
 					<Button
 						onClick={handleMint}

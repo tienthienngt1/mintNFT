@@ -27,6 +27,18 @@ export const getRarityOfTokenId = async (id?: string) => {
 	return;
 };
 
+export const getTotalSupply = async () => {
+	if (contractNft && web3Nft) {
+		try {
+			const rarity = await contractNft.methods.totalSupply().call();
+			return rarity;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
 export const mint = async (address: string, amount: number) => {
 	if (contractNft && web3Nft) {
 		try {
