@@ -50,6 +50,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 				severity: res?.status ? "success" : "error",
 			});
 			setAmount("");
+			await getTotalSupply();
 		}
 	};
 
@@ -133,7 +134,12 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 										height: 20,
 										borderRadius: 5,
 									}}
-									value={10}
+									value={Number(
+										(
+											(Number(totalSupply) / 2000) *
+											100
+										).toFixed(1)
+									)}
 								/>
 								<span
 									style={{
@@ -152,11 +158,14 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							</div>
 							<Typography>Total Minted</Typography>
 						</Box>
-						<Stack direction={"row"} justifyContent="space-between">
-							<Typography color={"rgb(0,0,0,0.6)"}>
+						<Stack
+							direction={{ md: "row", xs: "column" }}
+							justifyContent="space-between"
+						>
+							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
 								Price: 0.005 ETH
 							</Typography>
-							<Typography color={"rgb(0,0,0,0.6)"}>
+							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
 								Max: 3 Nfts
 							</Typography>
 						</Stack>
@@ -177,7 +186,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 												fontSize: 16,
 											}}
 										>
-											(0/3)
+											{`(${amount ? amount : 0}/3)`}
 										</span>
 									</InputAdornment>
 								),

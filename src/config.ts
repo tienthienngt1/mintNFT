@@ -3,7 +3,7 @@
 export const METADAT_URL = "https://nuwton.io/api/v1/launchpad/mdcc/";
 export const CHAIN_ID = "0x61"; // edit here
 export const TOKEN_CONTRACT = "";
-export const NFT_CONTRACT = "0x2Fd2F5644B7EC511AB1B6A2B992158768eE6D831";
+export const NFT_CONTRACT = "0xA16Ea6CCd1ae1841F3Bd320e2097878B135FA1F8";
 
 export const ABI_NFT = [
 	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },

@@ -2,9 +2,12 @@ import { Stack } from "@mui/material";
 import CollectionMint from "components/mint/CollectionMint.component";
 import LogoMint from "components/mint/LogoMint.component";
 import MainMint from "components/mint/MainMint.component";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Reveal, Tween } from "react-gsap";
 const Mint = () => {
+	useLayoutEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const [status, setStatus] = useState<boolean>(false);
 	return (
 		<>
