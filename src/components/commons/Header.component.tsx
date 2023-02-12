@@ -28,7 +28,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 				<Link to="/">
 					<Box
 						component="img"
-						src="https://images.cooltext.com/5643413.png"
+						src="/logoHeader.png"
 						alt="logo"
 						width="100%"
 					/>

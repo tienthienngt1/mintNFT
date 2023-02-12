@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useMedia } from "react-use";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import "./app.css";
 import Layout from "layout/index.layout";
 import Background from "components/commons/Background.component";
@@ -18,9 +18,9 @@ export default function App() {
 	}, []);
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Layout />
 			<Background />
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
