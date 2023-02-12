@@ -10,7 +10,7 @@ const LogoMint = () => {
 				justifyContent: "center",
 				alignItems: "center",
 				borderRadius: 5,
-				background: "linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)",
+				background: "linear-gradient(-45deg, #5976f5 0%, #fc5347 100%)",
 			}}
 		>
 			<Box

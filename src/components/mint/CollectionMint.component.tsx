@@ -35,7 +35,9 @@ const Nft = ({ tokenId }: NftT) => {
 			}}
 		>
 			<Box component="img" src="/logo1.jpg" alt="image" width={"100%"} />
-			<Typography sx={{ p: 2, typography: {} }}>
+			<Typography
+				sx={{ p: 2, typography: { color: "rgb(255,255,255,0.6)" } }}
+			>
 				ShibaFighter #{tokenId}
 			</Typography>
 			<small
