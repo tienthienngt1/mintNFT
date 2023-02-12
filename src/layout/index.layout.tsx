@@ -17,13 +17,15 @@ export const Address = createContext<AddressT>({
 const Layout = () => {
 	const [address, setAddress] = useState<string | undefined>();
 	return (
-		<Address.Provider value={{ address, setAddress }}>
-			<Container maxWidth="xl">
-				<Header setAddress={setAddress} address={address} />
-				<Routers />
-				<Footer />
-			</Container>
-		</Address.Provider>
+		<>
+			<Address.Provider value={{ address, setAddress }}>
+				<Container maxWidth="xl">
+					<Header setAddress={setAddress} address={address} />
+					<Routers />
+					<Footer />
+				</Container>
+			</Address.Provider>
+		</>
 	);
 };
 

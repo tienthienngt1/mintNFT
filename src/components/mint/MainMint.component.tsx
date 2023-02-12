@@ -13,6 +13,7 @@ import { connectWallet } from "func/connectWallet";
 import { Address } from "layout/index.layout";
 import { getTotalSupply, mint } from "func/getInfoNft";
 import Notify from "components/commons/Nofity.component";
+import { Reveal, Tween } from "react-gsap";
 
 type MainMintT = {
 	status: boolean;
@@ -40,6 +41,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 		if (!address) {
 			await handleConnect();
 		} else {
+			if (!amount) return;
 			const res = await mint(address, Number(amount));
 			setStatus(!status);
 			setNotify({
@@ -64,109 +66,139 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 
 	return (
 		<>
-			<Box
-				sx={{
-					padding: "30px 20px",
-					borderRadius: 5,
-					background:
-						"linear-gradient(135deg, #5976f5 0%, #fc5347 100%)",
-				}}
-				width={{ lg: 570, md: 470, xs: 400 }}
-			>
-				<Typography
-					sx={{
-						typography: { lg: "h3", md: "h4", xs: "h5" },
-						fontWeight: "bold",
+			<Reveal>
+				<Tween
+					from={{
+						opacity: 0,
+						x: -50,
 					}}
-					gutterBottom
+					to={{
+						opacity: 1,
+						x: 0,
+					}}
+					duration={2}
+					delay={0.2}
 				>
-					ShibaFighter
-				</Typography>
-				<Stack
-					direction={"row"}
-					alignItems="center"
-					justifyContent="space-between"
-				>
-					<Avatar
-						alt="logo"
-						src="/logo.jpg"
-						sx={{ width: 100, height: 100 }}
-					/>
-					<Typography
+					<Box
 						sx={{
-							typography: { md: "h5", xs: "body1" },
-							fontWeight: "bold",
+							padding: "30px 20px",
+							borderRadius: 5,
+							background:
+								"linear-gradient(135deg, #5976f5 0%, #fc5347 100%)",
 						}}
+						width={{ lg: 570, md: 470, xs: 400 }}
 					>
-						Total: 2000NFTs
-					</Typography>
-				</Stack>
-				<Box sx={{ width: "100%", my: { lg: 5, md: 3 } }}>
-					<div style={{ position: "relative", marginBottom: 5 }}>
-						<LinearProgress
-							variant="determinate"
+						<Typography
 							sx={{
-								height: 20,
-								borderRadius: 5,
+								typography: {
+									lg: "h3",
+									md: "h4",
+									xs: "h5",
+								},
+								fontWeight: "bold",
 							}}
-							value={10}
-						/>
-						<span
-							style={{
-								position: "absolute",
-								color: "rgb(0,0,0,0.6)",
-								top: 0,
-								fontSize: 13,
-								right: "25%",
-							}}
+							gutterBottom
 						>
-							{`${((Number(totalSupply) / 2000) * 100).toFixed(
-								1
-							)}%	(${totalSupply}/2000)`}
-						</span>
-					</div>
-					<Typography>Total Minted</Typography>
-				</Box>
-				<Typography color={"rgb(0,0,0,0.6)"}>
-					Price: <span>0.005 ETH</span>
-				</Typography>
-				<TextField
-					label="Amount"
-					id="outlined-start-adornment"
-					sx={{ my: 1, width: "100%" }}
-					focused
-					value={amount}
-					onChange={(e) => setAmount(e.target.value)}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">
+							ShibaFighter
+						</Typography>
+						<Stack
+							direction={"row"}
+							alignItems="center"
+							justifyContent="space-between"
+						>
+							<Avatar
+								alt="logo"
+								src="/logo.jpg"
+								sx={{ width: 100, height: 100 }}
+							/>
+							<Typography
+								sx={{
+									typography: { md: "h5", xs: "body1" },
+									fontWeight: "bold",
+								}}
+							>
+								Total: 2000NFTs
+							</Typography>
+						</Stack>
+						<Box sx={{ width: "100%", my: { lg: 5, md: 3 } }}>
+							<div
+								style={{
+									position: "relative",
+									marginBottom: 5,
+								}}
+							>
+								<LinearProgress
+									variant="determinate"
+									sx={{
+										height: 20,
+										borderRadius: 5,
+									}}
+									value={10}
+								/>
 								<span
 									style={{
-										marginLeft: 10,
-										color: "rgb(0,0,0,0.5)",
-										fontSize: 16,
+										position: "absolute",
+										color: "rgb(0,0,0,0.6)",
+										top: 0,
+										fontSize: 13,
+										right: "25%",
 									}}
 								>
-									(0/3)
+									{`${(
+										(Number(totalSupply) / 2000) *
+										100
+									).toFixed(1)}%	(${totalSupply}/2000)`}
 								</span>
-							</InputAdornment>
-						),
-					}}
-				/>
-				<Stack
-					direction="row"
-					justifyContent={"center"}
-					sx={{ marginTop: { lg: 10, md: 3 } }}
-				>
-					<Button
-						onClick={handleMint}
-						variant={"contained"}
-						sx={{ background: "#A27BB6" }}
-					>
-						{address ? "Mint" : "Connect Wallet"}
-					</Button>
-				</Stack>
-			</Box>
+							</div>
+							<Typography>Total Minted</Typography>
+						</Box>
+						<Stack direction={"row"} justifyContent="space-between">
+							<Typography color={"rgb(0,0,0,0.6)"}>
+								Price: 0.005 ETH
+							</Typography>
+							<Typography color={"rgb(0,0,0,0.6)"}>
+								Max: 3 Nfts
+							</Typography>
+						</Stack>
+						<TextField
+							label="Amount"
+							id="outlined-start-adornment"
+							sx={{ my: 1, width: "100%" }}
+							focused
+							value={amount}
+							onChange={(e) => setAmount(e.target.value)}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<span
+											style={{
+												marginLeft: 10,
+												color: "rgb(0,0,0,0.5)",
+												fontSize: 16,
+											}}
+										>
+											(0/3)
+										</span>
+									</InputAdornment>
+								),
+							}}
+						/>
+						<Stack
+							direction="row"
+							justifyContent={"center"}
+							sx={{ marginTop: { lg: 10, md: 3 } }}
+						>
+							<Button
+								onClick={handleMint}
+								variant={"contained"}
+								sx={{ background: "#A27BB6" }}
+							>
+								{address ? "Mint" : "Connect Wallet"}
+							</Button>
+						</Stack>
+					</Box>
+				</Tween>
+			</Reveal>
 			<Notify
 				display={notify.display}
 				text={notify.text}

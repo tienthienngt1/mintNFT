@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import { getMyTokens, getRarityOfTokenId } from "func/getInfoNft";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
+import { Reveal, Tween } from "react-gsap";
 
 const rarityLable = ["common", "uncommon", "rare", "ultra rare", "Epic"];
 
@@ -77,16 +78,38 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 	}, [address, status]);
 	return (
 		<>
-			<Typography
-				sx={{ typography: { md: "h3", xs: "h4", color: "#cb3232" } }}
-			>
-				COLLECTION
-			</Typography>
-			<Box
-				component="img"
-				src="/headingUnderline.svg"
-				width={{ md: 400, xs: 290 }}
-			/>
+			<Reveal>
+				<Tween
+					from={{
+						opacity: 0,
+						x: -50,
+					}}
+					to={{
+						opacity: 1,
+						x: 0,
+					}}
+					delay={0.5}
+				>
+					<div>
+						<Typography
+							sx={{
+								typography: {
+									md: "h3",
+									xs: "h4",
+									color: "#cb3232",
+								},
+							}}
+						>
+							COLLECTION
+						</Typography>
+						<Box
+							component="img"
+							src="/headingUnderline.svg"
+							width={{ md: 400, xs: 290 }}
+						/>
+					</div>
+				</Tween>
+			</Reveal>
 			<Stack
 				direction={{ md: "row", xs: "column" }}
 				my={10}
@@ -95,21 +118,51 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 				alignItems={"center"}
 			>
 				{tokenId ? (
-					tokenId.map((t, k) => <Nft tokenId={t} key={t + k} />)
+					tokenId.map((t, k) => (
+						<Reveal key={t + k}>
+							<Tween
+								from={{
+									opacity: 0,
+									y: 20,
+								}}
+								to={{
+									opacity: 1,
+									y: 0,
+								}}
+								delay={0.5 * k}
+							>
+								<Nft tokenId={t} />
+							</Tween>
+						</Reveal>
+					))
 				) : (
 					<>
-						<Typography
-							sx={{
-								typography: {
-									md: "h3",
-									xs: "h5",
-									opacity: 0.6,
-									color: "#e04545",
-								},
-							}}
-						>
-							Empty
-						</Typography>
+						<Reveal>
+							<Tween
+								from={{
+									opacity: 0,
+									x: 50,
+								}}
+								to={{
+									opacity: 1,
+									x: 0,
+								}}
+								delay={0.7}
+							>
+								<Typography
+									sx={{
+										typography: {
+											md: "h3",
+											xs: "h5",
+											opacity: 0.6,
+											color: "#e04545",
+										},
+									}}
+								>
+									Empty
+								</Typography>
+							</Tween>
+						</Reveal>
 					</>
 				)}
 			</Stack>
