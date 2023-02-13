@@ -134,12 +134,14 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 										height: 20,
 										borderRadius: 5,
 									}}
-									value={Number(
-										(
-											(Number(totalSupply) / 2000) *
-											100
-										).toFixed(1)
-									)}
+									value={
+										Number(
+											(
+												(Number(totalSupply) / 2000) *
+												100
+											).toFixed(1)
+										) ?? 0
+									}
 								/>
 								<span
 									style={{
@@ -150,10 +152,12 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 										right: "25%",
 									}}
 								>
-									{`${(
-										(Number(totalSupply) / 2000) *
-										100
-									).toFixed(1)}%	(${totalSupply}/2000)`}
+									{`${
+										(
+											(Number(totalSupply) / 2000) *
+											100
+										).toFixed(1) ?? 0
+									}%	(${totalSupply}/2000)`}
 								</span>
 							</div>
 							<Typography>Total Minted</Typography>

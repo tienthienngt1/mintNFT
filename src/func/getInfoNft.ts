@@ -1,4 +1,6 @@
+import { ABI_NFT, NFT_CONTRACT } from "config";
 import { initialContractNft } from "./initialContract";
+import Web3 from "web3";
 const { contractNft, web3Nft } = initialContractNft();
 
 export const getMyTokens = async (address: string) => {
@@ -28,13 +30,22 @@ export const getRarityOfTokenId = async (id?: string) => {
 };
 
 export const getTotalSupply = async () => {
-	if (contractNft && web3Nft) {
-		try {
-			const rarity = await contractNft.methods.totalSupply().call();
-			return rarity;
-		} catch (error) {
-			return;
-		}
+	const web3 = new Web3(
+		new Web3.providers.HttpProvider(
+			"https://data-seed-prebsc-1-s1.binance.org:8545"
+		)
+	); // testnet
+	// const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443')) // mainet
+	const contractNft = new web3.eth.Contract(
+		//@ts-ignore
+		ABI_NFT,
+		NFT_CONTRACT
+	);
+	try {
+		const rarity = await contractNft.methods.totalSupply().call();
+		return rarity;
+	} catch (error) {
+		return;
 	}
 	return;
 };
