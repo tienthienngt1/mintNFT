@@ -6,12 +6,6 @@ import { Tween, Reveal } from "react-gsap";
 import { Link } from "react-router-dom";
 
 const IntroHome = () => {
-	const reftitle = useRef(null);
-	const reftext1 = useRef(null);
-	const reftext2 = useRef(null);
-	const reftext3 = useRef(null);
-	const refbutton1 = useRef(null);
-	const refbutton2 = useRef(null);
 	return (
 		<>
 			<Grid
@@ -55,7 +49,7 @@ const IntroHome = () => {
 				</Tween>
 				<Grid md={7}>
 					<Stack py={10} px={2}>
-						<Reveal trigger={reftitle.current}>
+						<Reveal>
 							<Tween
 								from={{
 									opacity: 0,
@@ -68,7 +62,6 @@ const IntroHome = () => {
 								delay={0}
 							>
 								<Typography
-									ref={reftitle}
 									sx={{
 										typography: {
 											md: "h4",
@@ -87,9 +80,8 @@ const IntroHome = () => {
 								/>
 							</Tween>
 						</Reveal>
-						<Reveal trigger={reftext1.current}>
+						<Reveal>
 							<Tween
-								ref={reftext1}
 								from={{
 									opacity: 0,
 									y: 20,
@@ -112,9 +104,8 @@ const IntroHome = () => {
 								</Typography>
 							</Tween>
 						</Reveal>
-						<Reveal trigger={reftext2.current}>
+						<Reveal>
 							<Tween
-								ref={reftext2}
 								from={{
 									opacity: 0,
 									y: 20,
@@ -134,9 +125,8 @@ const IntroHome = () => {
 								</Typography>
 							</Tween>
 						</Reveal>
-						<Reveal trigger={reftext3.current}>
+						<Reveal>
 							<Tween
-								ref={reftext3}
 								from={{
 									opacity: 0,
 									y: 20,
@@ -160,9 +150,8 @@ const IntroHome = () => {
 							spacing={2}
 							sx={{ marginTop: 5 }}
 						>
-							<Reveal trigger={refbutton1.current}>
+							<Reveal>
 								<Tween
-									ref={refbutton1}
 									from={{
 										opacity: 0,
 										scaleX: 0,
@@ -180,9 +169,8 @@ const IntroHome = () => {
 									</Link>
 								</Tween>
 							</Reveal>
-							<Reveal trigger={refbutton2.current}>
+							<Reveal>
 								<Tween
-									ref={refbutton2}
 									from={{
 										opacity: 0,
 										scaleX: 0,
