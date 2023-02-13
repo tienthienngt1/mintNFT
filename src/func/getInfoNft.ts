@@ -1,10 +1,10 @@
 import { ABI_NFT, NFT_CONTRACT } from "config";
 import { initialContractNft } from "./initialContract";
 import Web3 from "web3";
-const { contractNft, web3Nft } = initialContractNft();
+const { contractNft, web3 } = initialContractNft();
 
 export const getMyTokens = async (address: string) => {
-	if (contractNft && web3Nft) {
+	if (contractNft) {
 		try {
 			const token = await contractNft.methods.getMyTokens(address).call();
 			return token;
@@ -16,7 +16,7 @@ export const getMyTokens = async (address: string) => {
 };
 
 export const getRarityOfTokenId = async (id?: string) => {
-	if (contractNft && web3Nft) {
+	if (contractNft) {
 		try {
 			const rarity = await contractNft.methods
 				.rarityOfTokenId(id ?? 0)
@@ -51,14 +51,11 @@ export const getTotalSupply = async () => {
 };
 
 export const mint = async (address: string, amount: number) => {
-	if (contractNft && web3Nft) {
+	if (contractNft) {
 		try {
 			const res = await contractNft.methods.mint(amount).send({
 				from: address,
-				value: web3Nft.utils.toWei(
-					(amount * 0.005).toString(),
-					"ether"
-				),
+				value: web3.utils.toWei((amount * 0.005).toString(), "ether"),
 			});
 			return res;
 		} catch (error) {

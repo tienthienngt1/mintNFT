@@ -1,6 +1,8 @@
 import { Box, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
 import { getMyTokens, getRarityOfTokenId } from "func/getInfoNft";
+import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
 import { Reveal, Tween } from "react-gsap";
@@ -11,7 +13,7 @@ type NftT = {
 	tokenId: string;
 };
 
-const Nft = ({ tokenId }: NftT) => {
+export const Nft = ({ tokenId }: NftT) => {
 	const [rarity, setRarity] = useState<string | undefined>();
 	useEffect(() => {
 		const getfunc = async () => {
@@ -23,7 +25,6 @@ const Nft = ({ tokenId }: NftT) => {
 
 	return (
 		<Box
-			width={{ md: "30%", xs: "90%" }}
 			className={`container_rarity${rarity}`}
 			sx={{
 				position: "relative",
@@ -71,7 +72,7 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 		const token = async () => {
 			const res = await getMyTokens(address);
 			if (res.length > 0) {
-				setTokenId(res);
+				setTokenId(sortArray(res));
 			} else {
 				setTokenId(undefined);
 			}
@@ -119,54 +120,58 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 				justifyContent={"center"}
 				alignItems={"center"}
 			>
-				{tokenId ? (
-					tokenId.map((t, k) => (
-						<Reveal key={t + k}>
-							<Tween
-								from={{
-									opacity: 0,
-									y: 20,
-								}}
-								to={{
-									opacity: 1,
-									y: 0,
-								}}
-								delay={0.5 * k}
-							>
-								<Nft tokenId={t} />
-							</Tween>
-						</Reveal>
-					))
-				) : (
-					<>
-						<Reveal>
-							<Tween
-								from={{
-									opacity: 0,
-									x: 50,
-								}}
-								to={{
-									opacity: 1,
-									x: 0,
-								}}
-								delay={0.7}
-							>
-								<Typography
-									sx={{
-										typography: {
-											md: "h3",
-											xs: "h5",
-											opacity: 0.6,
-											color: "#e04545",
-										},
+				<Grid container spacing={2}>
+					{tokenId ? (
+						tokenId?.map((t, k) => (
+							<Grid key={t + k} md={4} lg={3}>
+								<Reveal>
+									<Tween
+										from={{
+											opacity: 0,
+											y: 20,
+										}}
+										to={{
+											opacity: 1,
+											y: 0,
+										}}
+										delay={0.5 * k}
+									>
+										<Nft tokenId={t} />
+									</Tween>
+								</Reveal>
+							</Grid>
+						))
+					) : (
+						<>
+							<Reveal>
+								<Tween
+									from={{
+										opacity: 0,
+										x: 50,
 									}}
+									to={{
+										opacity: 1,
+										x: 0,
+									}}
+									delay={0.7}
 								>
-									Empty
-								</Typography>
-							</Tween>
-						</Reveal>
-					</>
-				)}
+									<Typography
+										sx={{
+											typography: {
+												md: "h3",
+												xs: "h5",
+												opacity: 0.6,
+												color: "#e04545",
+											},
+										}}
+									>
+										Empty
+									</Typography>
+								</Tween>
+							</Reveal>
+						</>
+					)}
+				</Grid>
 			</Stack>
 		</>
 	);

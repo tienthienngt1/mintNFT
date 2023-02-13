@@ -1,16 +1,57 @@
-import { ABI_NFT, NFT_CONTRACT } from "config";
+import {
+	ABI_GAME,
+	ABI_NFT,
+	ABI_TOKEN,
+	GAME_CONTRACT,
+	NFT_CONTRACT,
+	TOKEN_CONTRACT,
+} from "config";
 import Web3 from "web3";
 declare var window: any;
 
-export const initialContractNft = () => {
+const web3Func = () => {
+	let web3js;
 	if (window.ethereum) {
-		const web3Nft = new Web3(window.ethereum);
-		const contractNft = new web3Nft.eth.Contract(
+		web3js = new Web3(window.ethereum);
+	} else {
+		web3js = undefined;
+	}
+	return web3js;
+};
+
+export const initialContractNft = () => {
+	const web3 = web3Func();
+	if (web3) {
+		const contractNft = new web3.eth.Contract(
 			//@ts-ignore
 			ABI_NFT,
 			NFT_CONTRACT
 		);
-		return { contractNft, web3Nft };
+		return { contractNft, web3 };
 	}
-	return { contractNft: undefined, web3Nft: undefined };
+	return { contractNft: undefined, web3 };
+};
+export const initialContractGame = () => {
+	const web3 = web3Func();
+	if (web3) {
+		const contractGame = new web3.eth.Contract(
+			//@ts-ignore
+			ABI_GAME,
+			GAME_CONTRACT
+		);
+		return { contractGame, web3 };
+	}
+	return { contractGame: undefined, web3 };
+};
+export const initialContractToken = () => {
+	const web3 = web3Func();
+	if (web3) {
+		const contractToken = new web3.eth.Contract(
+			//@ts-ignore
+			ABI_TOKEN,
+			TOKEN_CONTRACT
+		);
+		return { contractToken, web3 };
+	}
+	return { contractToken: undefined, web3 };
 };
