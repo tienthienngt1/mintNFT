@@ -2,7 +2,7 @@
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1"
 export const CHAIN_ID = "0x61"; // edit here
 export const NFT_CONTRACT = "0xA16Ea6CCd1ae1841F3Bd320e2097878B135FA1F8";
-export const GAME_CONTRACT = "0xc563144f70092346A408F57420Ade3dd665C3406";
+export const GAME_CONTRACT = "0xFc148444c4B8251490976850429d950967d571E7";
 export const TOKEN_CONTRACT = "0xC78F9aAFb890d51d5cB72431028Bc7393130c1cC";
 
 export const ABI_NFT = [
@@ -412,6 +412,13 @@ export const ABI_GAME = [
 		type: "event",
 	},
 	{
+		inputs: [{ internalType: "address", name: "", type: "address" }],
+		name: "balanceOfGame",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
 		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
 		name: "depositPoolGame",
 		outputs: [],
@@ -453,13 +460,6 @@ export const ABI_GAME = [
 		type: "function",
 	},
 	{
-		inputs: [],
-		name: "poolGame",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
 		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		name: "profitLastOfToken",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -497,10 +497,24 @@ export const ABI_GAME = [
 		type: "function",
 	},
 	{
+		inputs: [{ internalType: "address", name: "", type: "address" }],
+		name: "timeAttackFirst",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
 		inputs: [
 			{ internalType: "address", name: "newOwner", type: "address" },
 		],
 		name: "transferOwnership",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "withdraw",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",

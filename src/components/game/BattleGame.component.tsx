@@ -8,12 +8,14 @@ import { Address } from "layout/index.layout";
 import { useEventEth } from "hooks/useEventEth";
 import Notify from "components/commons/Nofity.component";
 import {
+	getBalanceOfGame,
 	getResult,
 	getTurn,
 	getValue,
 	largeAttack,
 	mediumAttack,
 	smallAttack,
+	withdrawGame,
 } from "func/interactGame";
 import { getBalance } from "func/interactToken";
 import ResultModalGame from "./ResultModalGame.component";
@@ -104,6 +106,11 @@ const Zombie = ({
 						loading={isLoading[keyAttack]}
 						color={"error"}
 						onClick={() => handleAttack(keyAttack)}
+						sx={{
+							":MuiDisabled": {
+								backgroundColor: "#f02f4f",
+							},
+						}}
 					>
 						<img
 							src="/attack.png"
@@ -160,6 +167,7 @@ const BattleGame = () => {
 	const { address, setAddress } = useContext(Address);
 	const [tokenId, setTokenId] = useState<string | undefined>();
 	const [balance, setBalance] = useState<string | undefined>();
+	const [balanceOfGame, setBalanceOfGame] = useState<string | undefined>();
 	const [turn, setTurn] = useState<string | undefined>();
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [isLoading, setIsLoading] = useState([false, false, false]);
@@ -216,11 +224,25 @@ const BattleGame = () => {
 		setIsLoading([false, false, false]);
 	};
 
+	const handleWithdraw = async () => {
+		if (!address) return;
+		const value = await withdrawGame(address);
+		setToggleStatus(!toggleStatus);
+		if (value) {
+			setNotify({
+				display: true,
+				text: "Withdraw successfully",
+				severity: "success",
+			});
+		}
+	};
 	useEffect(() => {
 		const asyncFunc = async () => {
 			if (address) {
-				const amountBalance = await getBalance(address);
-				setBalance(amountBalance);
+				const _amountBalance = await getBalance(address);
+				const _balanceOfGame = await getBalanceOfGame(address);
+				setBalance(_amountBalance);
+				setBalanceOfGame(_balanceOfGame);
 			}
 			if (tokenId) {
 				const amountTurn = await getTurn(tokenId);
@@ -232,15 +254,28 @@ const BattleGame = () => {
 
 	return (
 		<>
+			<Typography color={"error"} align="right">
+				Token Available:
+				{balance ? `${Math.floor(Number(balance)) ?? 0}` : "..."}
+			</Typography>
+			<Typography color={"error"} align="right">
+				Token Game:
+				{balanceOfGame
+					? `${Math.floor(Number(balanceOfGame)) ?? 0}`
+					: "..."}
+			</Typography>
 			<Stack
 				direction="row"
 				justifyContent={"flex-end"}
 				sx={{ marginBottom: 3 }}
 			>
-				<Typography color={"error"}>
-					ShibaFighter Token:
-					{balance ? `${Math.floor(Number(balance)) ?? 0}` : "..."}
-				</Typography>
+				<Button
+					variant="contained"
+					color="error"
+					onClick={handleWithdraw}
+				>
+					Withdraw
+				</Button>
 			</Stack>
 			<Grid container spacing={2}>
 				{listZombie.map((l, k) => (

@@ -6,14 +6,14 @@ import {
 	Stack,
 	TextField,
 	InputAdornment,
-	Button,
 	LinearProgress,
 } from "@mui/material";
 import { connectWallet } from "func/connectWallet";
 import { Address } from "layout/index.layout";
-import { getTotalSupply, mint } from "func/getInfoNft";
+import { getQtyOfMinter, getTotalSupply, mint } from "func/getInfoNft";
 import Notify from "components/commons/Nofity.component";
 import { Reveal, Tween } from "react-gsap";
+import { LoadingButton } from "@mui/lab";
 
 type MainMintT = {
 	status: boolean;
@@ -23,6 +23,8 @@ type MainMintT = {
 const MainMint = ({ setStatus, status }: MainMintT) => {
 	const { address, setAddress } = useContext(Address);
 	const [amount, setAmount] = useState<string | undefined>("");
+	const [isLoading, setLoading] = useState(false);
+	const [amountMinted, setAmountMinted] = useState<string | undefined>("");
 	const [totalSupply, setTotalSupply] = useState<string | undefined>("");
 
 	const [notify, setNotify] = useState<{
@@ -42,6 +44,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 			await handleConnect();
 		} else {
 			if (!amount) return;
+			setLoading(true);
 			const res = await mint(address, Number(amount));
 			setStatus(!status);
 			setNotify({
@@ -50,7 +53,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 				severity: res?.status ? "success" : "error",
 			});
 			setAmount("");
-			await getTotalSupply();
+			setLoading(false);
 		}
 	};
 
@@ -61,9 +64,14 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 		const func = async () => {
 			const res = await getTotalSupply();
 			setTotalSupply(res);
+			if (address) {
+				const qtyMint = await getQtyOfMinter(address);
+				setAmountMinted(qtyMint);
+			}
+			setTotalSupply(res);
 		};
 		func();
-	}, []);
+	}, [status, address]);
 
 	return (
 		<>
@@ -190,7 +198,9 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 												fontSize: 16,
 											}}
 										>
-											{`(${amount ? amount : 0}/3)`}
+											{`(${
+												amountMinted ? amountMinted : 0
+											}/3)`}
 										</span>
 									</InputAdornment>
 								),
@@ -201,13 +211,14 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							justifyContent={"center"}
 							sx={{ marginTop: { lg: 10, md: 3 } }}
 						>
-							<Button
+							<LoadingButton
+								loading={isLoading}
 								onClick={handleMint}
 								variant={"contained"}
 								sx={{ background: "#A27BB6" }}
 							>
 								{address ? "Mint" : "Connect Wallet"}
-							</Button>
+							</LoadingButton>
 						</Stack>
 					</Box>
 				</Tween>

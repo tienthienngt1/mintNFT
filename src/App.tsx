@@ -5,6 +5,7 @@ import "./app.css";
 import Layout from "layout/index.layout";
 import Background from "components/commons/Background.component";
 import Loading from "components/commons/Loading.component";
+import "./MuiClassNameSetup.js";
 
 export default function App() {
 	const width = useMedia("(max-width: 400px)");

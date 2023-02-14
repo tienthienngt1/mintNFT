@@ -85,3 +85,31 @@ export const getValue = async (tokenId: string) => {
 	}
 	return;
 };
+
+export const getBalanceOfGame = async (address: string) => {
+	if (contractGame) {
+		try {
+			const value = await contractGame.methods
+				.balanceOfGame(address)
+				.call();
+			return web3.utils.fromWei(value, "gwei");
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const withdrawGame = async (address: string) => {
+	if (contractGame) {
+		try {
+			const res = await contractGame.methods.withdraw().send({
+				from: address,
+			});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};

@@ -29,6 +29,20 @@ export const getRarityOfTokenId = async (id?: string) => {
 	return;
 };
 
+export const getQtyOfMinter = async (address: string) => {
+	if (contractNft) {
+		try {
+			const rarity = await contractNft.methods
+				.publicSalesMinterToTokenQty(address)
+				.call();
+			return rarity;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
 export const getTotalSupply = async () => {
 	const web3 = new Web3(
 		new Web3.providers.HttpProvider(
