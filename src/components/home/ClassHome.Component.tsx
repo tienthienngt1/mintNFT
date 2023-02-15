@@ -9,9 +9,29 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectCards, Pagination, Navigation } from "swiper";
 import { Tween, Reveal } from "react-gsap";
-import { useRef } from "react";
 
-const rarityLable = ["common", "uncommon", "rare", "ultra rare", "Epic"];
+const rarityLable = [
+	{
+		name: "common",
+		url: "/common.jpg",
+	},
+	{
+		name: "uncommon",
+		url: "/uncommon.jpg",
+	},
+	{
+		name: "rare",
+		url: "/rare.jpg",
+	},
+	{
+		name: "ultra rare",
+		url: "/ultrarare.jpg",
+	},
+	{
+		name: "Epic",
+		url: "/epic.jpg",
+	},
+];
 const ClassHome = () => {
 	return (
 		<>
@@ -66,7 +86,7 @@ const ClassHome = () => {
 						>
 							{rarityLable.map((r, k) => (
 								<SwiperSlide
-									key={r + k}
+									key={r.name + k}
 									style={{
 										display: "flex",
 										justifyContent: "center",
@@ -88,7 +108,7 @@ const ClassHome = () => {
 									>
 										<Box
 											component="img"
-											src="/logo1.jpg"
+											src={r.url}
 											width={{ md: 500, xs: 360 }}
 											alt="image"
 										/>
@@ -98,7 +118,7 @@ const ClassHome = () => {
 											align="center"
 											color="rgb(255,255,255,0.8)"
 										>
-											{r}
+											{r.name}
 										</Typography>
 									</Box>
 								</SwiperSlide>

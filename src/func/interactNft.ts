@@ -1,4 +1,4 @@
-import { ABI_NFT, NFT_CONTRACT } from "config";
+import { NFT_ABI, NFT_CONTRACT } from "config";
 import { initialContractNft } from "./initialContract";
 import Web3 from "web3";
 const { contractNft, web3 } = initialContractNft();
@@ -45,14 +45,12 @@ export const getQtyOfMinter = async (address: string) => {
 
 export const getTotalSupply = async () => {
 	const web3 = new Web3(
-		new Web3.providers.HttpProvider(
-			"https://data-seed-prebsc-1-s1.binance.org:8545"
-		)
+		new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli")
 	); // testnet
 	// const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443')) // mainet
 	const contractNft = new web3.eth.Contract(
 		//@ts-ignore
-		ABI_NFT,
+		NFT_ABI,
 		NFT_CONTRACT
 	);
 	try {
@@ -69,7 +67,6 @@ export const mint = async (address: string, amount: number) => {
 		try {
 			const res = await contractNft.methods.mint(amount).send({
 				from: address,
-				value: web3.utils.toWei((amount * 0.005).toString(), "ether"),
 			});
 			return res;
 		} catch (error) {

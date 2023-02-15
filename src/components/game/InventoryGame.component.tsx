@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Nft } from "components/mint/CollectionMint.component";
-import { getMyTokens } from "func/getInfoNft";
+import { getMyTokens } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";

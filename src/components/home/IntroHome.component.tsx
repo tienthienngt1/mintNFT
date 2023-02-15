@@ -1,11 +1,30 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import ButtonCustom from "components/commons/ButtonCustom.component";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import { Tween, Reveal } from "react-gsap";
 import { Link } from "react-router-dom";
-
+const logo = [
+	"/common.jpg",
+	"/uncommon.jpg",
+	"/rare.jpg",
+	"/ultrarare.jpg",
+	"epic.jpg",
+];
 const IntroHome = () => {
+	const [index, setIndex] = useState<number>(0);
+	useEffect(() => {
+		const id = setInterval(() => {
+			if (index < 4) {
+				setIndex(index + 1);
+			} else {
+				setIndex(0);
+			}
+		}, 1500);
+		return () => {
+			clearInterval(id);
+		};
+	}, [index]);
 	return (
 		<>
 			<Grid
@@ -15,6 +34,7 @@ const IntroHome = () => {
 					justifyContent: "center",
 					alignItems: "center",
 				}}
+				spacing={3}
 			>
 				<Tween
 					from={{
@@ -37,7 +57,7 @@ const IntroHome = () => {
 								component="img"
 								width={{ md: 500, xs: 400 }}
 								height={{ md: 600, xs: 500 }}
-								src="/logo2.jpg"
+								src={logo[index]}
 								alt="brand"
 								sx={{
 									borderRadius: 5,

@@ -1,7 +1,7 @@
 import {
-	ABI_GAME,
-	ABI_NFT,
-	ABI_TOKEN,
+	GAME_ABI,
+	NFT_ABI,
+	TOKEN_ABI,
 	GAME_CONTRACT,
 	NFT_CONTRACT,
 	TOKEN_CONTRACT,
@@ -24,7 +24,7 @@ export const initialContractNft = () => {
 	if (web3) {
 		const contractNft = new web3.eth.Contract(
 			//@ts-ignore
-			ABI_NFT,
+			NFT_ABI,
 			NFT_CONTRACT
 		);
 		return { contractNft, web3 };
@@ -36,7 +36,7 @@ export const initialContractGame = () => {
 	if (web3) {
 		const contractGame = new web3.eth.Contract(
 			//@ts-ignore
-			ABI_GAME,
+			GAME_ABI,
 			GAME_CONTRACT
 		);
 		return { contractGame, web3 };
@@ -48,7 +48,7 @@ export const initialContractToken = () => {
 	if (web3) {
 		const contractToken = new web3.eth.Contract(
 			//@ts-ignore
-			ABI_TOKEN,
+			TOKEN_ABI,
 			TOKEN_CONTRACT
 		);
 		return { contractToken, web3 };

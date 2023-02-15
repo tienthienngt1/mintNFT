@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useContext, useEffect, useState } from "react";
 import { sortArray } from "func/sortArray";
-import { getMyTokens } from "func/getInfoNft";
+import { getMyTokens } from "func/interactNft";
 import { Address } from "layout/index.layout";
 import { Nft } from "components/mint/CollectionMint.component";
 import { useEventEth } from "hooks/useEventEth";

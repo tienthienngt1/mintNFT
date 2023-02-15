@@ -1,6 +1,28 @@
 import { Box, Paper } from "@mui/material";
+import { useEffect, useState } from "react";
+
+const logo = [
+	"/common.jpg",
+	"/uncommon.jpg",
+	"/rare.jpg",
+	"/ultrarare.jpg",
+	"epic.jpg",
+];
 
 const LogoMint = () => {
+	const [index, setIndex] = useState<number>(0);
+	useEffect(() => {
+		const id = setTimeout(() => {
+			if (index < 4) {
+				setIndex(index + 1);
+			} else {
+				setIndex(0);
+			}
+		}, 1500);
+		return () => {
+			clearTimeout(id);
+		};
+	}, [index]);
 	return (
 		<Paper
 			sx={{
@@ -15,7 +37,7 @@ const LogoMint = () => {
 		>
 			<Box
 				component={"img"}
-				src={"/logo1.jpg"}
+				src={logo[index]}
 				width={{ lg: 550, md: 450, xs: 380 }}
 				alt="logo1_mint"
 				sx={{ borderRadius: 5 }}

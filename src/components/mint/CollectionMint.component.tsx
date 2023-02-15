@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { getMyTokens, getRarityOfTokenId } from "func/getInfoNft";
+import { getMyTokens, getRarityOfTokenId } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
@@ -12,6 +12,14 @@ const rarityLable = ["common", "uncommon", "rare", "ultra rare", "Epic"];
 type NftT = {
 	tokenId: string;
 };
+
+const logoOfRarity = [
+	"common.jpg",
+	"uncommon.jpg",
+	"rare.jpg",
+	"ultrarare.jpg",
+	"epic.jpg",
+];
 
 export const Nft = ({ tokenId }: NftT) => {
 	const [rarity, setRarity] = useState<string | undefined>();
@@ -25,17 +33,20 @@ export const Nft = ({ tokenId }: NftT) => {
 
 	return (
 		<Box
-			className={`container_rarity${rarity}`}
 			sx={{
 				position: "relative",
-				borderRadius: 5,
 				overflow: "hidden",
 				":hover": {
 					cursor: "pointer",
 				},
 			}}
 		>
-			<Box component="img" src="/logo1.jpg" alt="image" width={"100%"} />
+			<Box
+				component="img"
+				src={logoOfRarity[Number(rarity) - 1]}
+				alt="image"
+				width={"100%"}
+			/>
 			<Typography
 				sx={{ p: 2, typography: { color: "rgb(255,255,255,0.6)" } }}
 			>
@@ -49,7 +60,8 @@ export const Nft = ({ tokenId }: NftT) => {
 					left: 5,
 					padding: "1px 10px",
 					fontWeight: 600,
-					borderRadius: 10,
+					borderBottomLeftRadius: 10,
+					borderBottomRightRadius: 10,
 					textTransform: "uppercase",
 					color: "#fff",
 				}}

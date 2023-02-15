@@ -1,12 +1,18 @@
 //request switch chain
-// BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1"
-export const CHAIN_ID = "0x61"; // edit here
-export const NFT_CONTRACT = "0xA16Ea6CCd1ae1841F3Bd320e2097878B135FA1F8";
-export const GAME_CONTRACT = "0xFc148444c4B8251490976850429d950967d571E7";
-export const TOKEN_CONTRACT = "0xC78F9aAFb890d51d5cB72431028Bc7393130c1cC";
+// BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
+export const CHAIN_ID = "0x5"; // edit here
+export const NFT_CONTRACT = "0xc6710043136e329CF628CECE1D74c3C82BaB2b95";
+export const TOKEN_CONTRACT = "0x13Aa4035829B01CACE9aEBa722be9fA5614D7708";
+export const GAME_CONTRACT = "0x71aC9D1aB5fc12f1C6367C57169DD45d91E251e1";
 
-export const ABI_NFT = [
-	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
+export const NFT_ABI = [
+	{
+		inputs: [
+			{ internalType: "address", name: "_addressToken", type: "address" },
+		],
+		stateMutability: "nonpayable",
+		type: "constructor",
+	},
 	{
 		anonymous: false,
 		inputs: [
@@ -103,7 +109,7 @@ export const ABI_NFT = [
 	},
 	{
 		inputs: [],
-		name: "PUBLIC_SALES_PRICE",
+		name: "SALES_PRICE",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
@@ -185,7 +191,7 @@ export const ABI_NFT = [
 		],
 		name: "mint",
 		outputs: [],
-		stateMutability: "payable",
+		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
@@ -332,6 +338,15 @@ export const ABI_NFT = [
 		type: "function",
 	},
 	{
+		inputs: [],
+		name: "tokenAddress",
+		outputs: [
+			{ internalType: "contract IERC20", name: "", type: "address" },
+		],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
 		inputs: [{ internalType: "uint256", name: "index", type: "uint256" }],
 		name: "tokenByIndex",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -389,138 +404,16 @@ export const ABI_NFT = [
 		stateMutability: "nonpayable",
 		type: "function",
 	},
-];
-export const ABI_GAME = [
-	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
-	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: true,
-				internalType: "address",
-				name: "previousOwner",
-				type: "address",
-			},
-			{
-				indexed: true,
-				internalType: "address",
-				name: "newOwner",
-				type: "address",
-			},
-		],
-		name: "OwnershipTransferred",
-		type: "event",
-	},
-	{
-		inputs: [{ internalType: "address", name: "", type: "address" }],
-		name: "balanceOfGame",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
-		name: "depositPoolGame",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
-		],
-		name: "getTurnOfToken",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
-		],
-		name: "largeAttack",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
-		],
-		name: "mediumAttack",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
 	{
 		inputs: [],
-		name: "owner",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		name: "profitLastOfToken",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "renounceOwnership",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		name: "resultLastOfToken",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
-		name: "setTokenByEth",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
-		],
-		name: "smallAttack",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "address", name: "", type: "address" }],
-		name: "timeAttackFirst",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [
-			{ internalType: "address", name: "newOwner", type: "address" },
-		],
-		name: "transferOwnership",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "withdraw",
+		name: "withdrawAllToken",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 ];
-export const ABI_TOKEN = [
+
+export const TOKEN_ABI = [
 	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
 	{
 		anonymous: false,
@@ -1019,4 +912,142 @@ export const ABI_TOKEN = [
 		type: "function",
 	},
 	{ stateMutability: "payable", type: "receive" },
+];
+
+export const GAME_ABI = [
+	{
+		inputs: [
+			{ internalType: "address", name: "_token", type: "address" },
+			{ internalType: "address", name: "_nft", type: "address" },
+		],
+		stateMutability: "nonpayable",
+		type: "constructor",
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{
+				indexed: true,
+				internalType: "address",
+				name: "previousOwner",
+				type: "address",
+			},
+			{
+				indexed: true,
+				internalType: "address",
+				name: "newOwner",
+				type: "address",
+			},
+		],
+		name: "OwnershipTransferred",
+		type: "event",
+	},
+	{
+		inputs: [{ internalType: "address", name: "", type: "address" }],
+		name: "balanceOfGame",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		name: "depositPoolGame",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "getTurnOfToken",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "largeAttack",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "mediumAttack",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "owner",
+		outputs: [{ internalType: "address", name: "", type: "address" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		name: "profitLastOfToken",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "renounceOwnership",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		name: "resultLastOfToken",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		name: "setTokenByEth",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "smallAttack",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "address", name: "", type: "address" }],
+		name: "timeAttackFirst",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "address", name: "newOwner", type: "address" },
+		],
+		name: "transferOwnership",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "withdraw",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
 ];

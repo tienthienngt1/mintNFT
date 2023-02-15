@@ -10,10 +10,11 @@ import {
 } from "@mui/material";
 import { connectWallet } from "func/connectWallet";
 import { Address } from "layout/index.layout";
-import { getQtyOfMinter, getTotalSupply, mint } from "func/getInfoNft";
+import { getQtyOfMinter, getTotalSupply, mint } from "func/interactNft";
 import Notify from "components/commons/Nofity.component";
 import { Reveal, Tween } from "react-gsap";
 import { LoadingButton } from "@mui/lab";
+import { approve } from "func/interactToken";
 
 type MainMintT = {
 	status: boolean;
@@ -44,14 +45,23 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 			await handleConnect();
 		} else {
 			if (!amount) return;
+			let res;
 			setLoading(true);
-			const res = await mint(address, Number(amount));
-			setStatus(!status);
+			const statusApprove = await approve(Number(amount), address);
+			if (statusApprove === true) {
+				res = await mint(address, Number(amount));
+			}
 			setNotify({
 				display: true,
-				text: res?.status ? "Mint successfull" : "Error",
+				text:
+					typeof statusApprove === "string"
+						? statusApprove
+						: res?.status
+						? "Mint successfull"
+						: "Error",
 				severity: res?.status ? "success" : "error",
 			});
+			res && setStatus(!status);
 			setAmount("");
 			setLoading(false);
 		}
@@ -129,7 +139,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 								Total: 2000NFTs
 							</Typography>
 						</Stack>
-						<Box sx={{ width: "100%", my: { lg: 5, md: 3 } }}>
+						<Box sx={{ width: "100%", my: 5 }}>
 							<div
 								style={{
 									position: "relative",
@@ -175,7 +185,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							justifyContent="space-between"
 						>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
-								Price: 0.005 ETH
+								Price: 10000 SBF
 							</Typography>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
 								Max: 3 Nfts

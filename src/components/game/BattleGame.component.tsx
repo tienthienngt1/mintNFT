@@ -28,6 +28,7 @@ type ZombieT = {
 	keyAttack: number;
 	turn: number;
 	handleAttack: (key: number) => void;
+	url: string;
 };
 
 const Zombie = ({
@@ -38,14 +39,13 @@ const Zombie = ({
 	handleAttack,
 	isLoading,
 	turn,
+	url,
 }: ZombieT) => {
 	return (
 		<>
 			<Box
-				className={`container_rarity${rarity}`}
 				sx={{
 					position: "relative",
-					borderRadius: 5,
 					overflow: "hidden",
 					":hover": {
 						cursor: "pointer",
@@ -53,12 +53,7 @@ const Zombie = ({
 					paddingBottom: 2,
 				}}
 			>
-				<Box
-					component="img"
-					src="/logo1.jpg"
-					alt="image"
-					width={"100%"}
-				/>
+				<Box component="img" src={url} alt="image" width={"100%"} />
 				<Typography
 					sx={{ p: 2, typography: { color: "rgb(255,255,255,0.6)" } }}
 				>
@@ -107,8 +102,8 @@ const Zombie = ({
 						color={"error"}
 						onClick={() => handleAttack(keyAttack)}
 						sx={{
-							":MuiDisabled": {
-								backgroundColor: "#f02f4f",
+							"&.Mui-disabled": {
+								backgroundColor: "#f86c84",
 							},
 						}}
 					>
@@ -122,21 +117,6 @@ const Zombie = ({
 						Attack
 					</LoadingButton>
 				</Stack>
-				<small
-					className={`text_rarity${rarity}`}
-					style={{
-						position: "absolute",
-						top: 5,
-						left: 5,
-						padding: "1px 10px",
-						fontWeight: 600,
-						borderRadius: 10,
-						textTransform: "uppercase",
-						color: "#fff",
-					}}
-				>
-					common
-				</small>
 			</Box>
 		</>
 	);
@@ -145,21 +125,24 @@ const Zombie = ({
 const listZombie = [
 	{
 		rarity: 1,
-		order: 1,
+		order: 3,
 		winRate: 80,
 		turn: 1,
+		url: "/easy.jpg",
 	},
 	{
 		rarity: 3,
 		order: 2,
 		winRate: 65,
 		turn: 2,
+		url: "/normal.jpg",
 	},
 	{
 		rarity: 5,
-		order: 3,
+		order: 1,
 		winRate: 50,
 		turn: 3,
+		url: "/hard.jpg",
 	},
 ];
 
@@ -288,6 +271,7 @@ const BattleGame = () => {
 							isLoading={isLoading}
 							handleAttack={handleAttack}
 							turn={l.turn}
+							url={l.url}
 						/>
 					</Grid>
 				))}
