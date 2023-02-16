@@ -1,26 +1,24 @@
 import { Typography, Box, Stack } from "@mui/material";
-import { Telegram } from "react-bootstrap-icons";
 import { Reveal, Tween } from "react-gsap";
-import { Link } from "react-router-dom";
 
 const rarityLable = [
 	{
-		name: "AVEF",
+		name: "Diodore",
 		desc: "CEO",
 		avatar: "/avatar1.jpg",
 	},
 	{
-		name: "AVEF",
+		name: "Sylvester",
 		desc: "DESIGNER",
 		avatar: "/avatar2.jpg",
 	},
 	{
-		name: "AVEF",
+		name: "Atli",
 		desc: "DEVERLOPER",
 		avatar: "/avatar3.jpg",
 	},
 	{
-		name: "AVEF",
+		name: "Taras",
 		desc: "COO",
 		avatar: "/avatar4.jpg",
 	},
@@ -108,35 +106,6 @@ const AboutHome = () => {
 								>
 									{r.desc}
 								</Typography>
-								<Stack
-									direction="row"
-									justifyContent={"center"}
-								>
-									<Link
-										to="https://telegram.com"
-										target="_blank"
-									>
-										<Box
-											sx={{
-												":hover": {
-													boxShadow:
-														"0px 0px 10px 0px red",
-												},
-												background:
-													"linear-gradient(136deg, #5976f5 0%, #fc5347 100%)",
-												boxShadow:
-													"0px 0px 10px 0px #5976f5",
-												transition: "0.4s",
-												padding: "10px",
-												borderRadius: "50%",
-												display: "grid",
-												placeContent: "center",
-											}}
-										>
-											<Telegram />
-										</Box>
-									</Link>
-								</Stack>
 							</Box>
 						</Tween>
 					</Reveal>

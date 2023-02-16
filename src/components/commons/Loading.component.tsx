@@ -9,7 +9,7 @@ const Loading = () => {
 				zIndex: 10,
 			}}
 		>
-			<span className="loader"></span>;
+			<span className="loader"></span>
 		</div>
 	);
 };
