@@ -4,9 +4,9 @@ import { Tween, Reveal } from "react-gsap";
 import { Link } from "react-router-dom";
 
 const list = [
-	"How to buy on the Arbitrum chain?",
+	<>&#3647; How to buy on the Arbitrum One chain?</>,
 	<>
-		Go to:{" "}
+		&#9755; Go to:{" "}
 		{
 			<Link
 				to="https://chainlist.org/"
@@ -17,10 +17,13 @@ const list = [
 			</Link>
 		}
 	</>,
-	"Connect your Metamask wallet and add Arbitrum One chain.",
-	" Buy some ETH on CEX (Binnace,..) and deposit ETH from CEX to metamask wallet via Arbitrum One network.",
+	<>&#9755; Connect your Metamask wallet and add Arbitrum One chain.</>,
 	<>
-		Go to:{" "}
+		&#9755; Buy some ETH on CEX (Binnace,..) and deposit ETH from CEX to
+		metamask wallet via Arbitrum One network.
+	</>,
+	<>
+		&#9755; Go to:{" "}
 		{
 			<Link
 				to="https://www.sushi.com/swap"
@@ -90,17 +93,19 @@ const HowToBuyHome = () => {
 						justifyContent={"center"}
 						spacing={5}
 					>
-						<Box width={{ md: 600, xs: 300 }}>
+						<Box width={{ md: 800 }}>
 							{list.map((l, k) => (
 								<Typography
 									key={k * 0.2}
 									sx={{
 										typography: {
 											color: "rgb(255,255,255,0.8)",
-											fontFamily:
-												'"Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;',
+											fontFamily: "monospace",
+											fontSize: 20,
+											marginLeft: k >= 1 ? 20 : 0,
 										},
 									}}
+									gutterBottom
 								>
 									{l}
 								</Typography>
