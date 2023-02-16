@@ -48,7 +48,7 @@ const TokenomicHome = () => {
 							},
 						}}
 					>
-						Tokenomic
+						Tokenomics
 					</Typography>
 					<img
 						src="/headingUnderline.svg"
@@ -59,7 +59,7 @@ const TokenomicHome = () => {
 			</Reveal>
 			<Container>
 				<Grid container spacing={2}>
-					<Grid md={6}>
+					<Grid md={4}>
 						<Stack
 							direction="column"
 							justifyContent={"center"}
@@ -89,7 +89,7 @@ const TokenomicHome = () => {
 							</Typography>
 						</Stack>
 					</Grid>
-					<Grid md={6} p={10}>
+					<Grid md={8} p={5}>
 						<Pie data={data} />
 					</Grid>
 				</Grid>

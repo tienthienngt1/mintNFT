@@ -115,6 +115,7 @@ const IntroHome = () => {
 								<Typography
 									color={"rgb(255,255,255,0.8)"}
 									gutterBottom
+									align="justify"
 								>
 									Get ready to enter the world of "Shiba
 									Fighter", where the blockchain meets the
@@ -142,6 +143,7 @@ const IntroHome = () => {
 								<Typography
 									color={"rgb(255,255,255,0.8)"}
 									gutterBottom
+									align="justify"
 								>
 									Each Shiba Fighter NFT in your collection
 									has its own rank. As you fight and win
@@ -164,7 +166,10 @@ const IntroHome = () => {
 								}}
 								delay={1}
 							>
-								<Typography color={"rgb(255,255,255,0.8)"}>
+								<Typography
+									color={"rgb(255,255,255,0.8)"}
+									align="justify"
+								>
 									But "Shiba Fighter" is more than just a game
 									– it's a vibrant community of passionate
 									players who share a love for blockchain
@@ -185,7 +190,10 @@ const IntroHome = () => {
 								}}
 								delay={1}
 							>
-								<Typography color={"rgb(255,255,255,0.8)"}>
+								<Typography
+									color={"rgb(255,255,255,0.8)"}
+									align="justify"
+								>
 									Join the battle today and become the
 									ultimate Shiba Fighter champion! With its
 									unparalleled combination of GameFi and
