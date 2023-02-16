@@ -71,7 +71,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 						: "Error",
 				severity: res?.status ? "success" : "error",
 			});
-			res && setStatus(!status);
+			setStatus(!status);
 			setAmount(0);
 			setLoading(false);
 		}
@@ -195,7 +195,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							justifyContent="space-between"
 						>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
-								Price: 10000 SBF
+								Price: 30000 SBF
 							</Typography>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
 								Max: 3 Nfts

@@ -1,5 +1,5 @@
 import { Box, Typography, Stack, Button } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { LoadingButton, timelineClasses } from "@mui/lab";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState, useContext, useEffect } from "react";
 import SelectModalGame from "./SelectModalGame.component";
@@ -10,6 +10,7 @@ import Notify from "components/commons/Nofity.component";
 import {
 	getBalanceOfGame,
 	getResult,
+	getNowOfToken,
 	getTurn,
 	getValue,
 	largeAttack,
@@ -19,10 +20,11 @@ import {
 } from "func/interactGame";
 import { getBalance } from "func/interactToken";
 import ResultModalGame from "./ResultModalGame.component";
+import { Clock } from "react-bootstrap-icons";
+import { convertStoH } from "func/convertStoH";
 
 type ZombieT = {
 	isLoading: boolean[];
-	rarity: number;
 	order: number;
 	winRate: number;
 	keyAttack: number;
@@ -32,7 +34,6 @@ type ZombieT = {
 };
 
 const Zombie = ({
-	rarity,
 	order,
 	winRate,
 	keyAttack,
@@ -146,6 +147,49 @@ const listZombie = [
 	},
 ];
 
+type TimeResetTurn = {
+	time: string | undefined;
+};
+
+const TimeResetTurn = ({ time }: TimeResetTurn) => {
+	const [time_, setTime] = useState<number>(0);
+	useEffect(() => {
+		if (time === "0") return;
+		setTime(86400 - Number(time));
+	}, [time]);
+	useEffect(() => {
+		if (!time_) return;
+		if (time_ < 1) return;
+		const id = setInterval(() => {
+			setTime(time_ - 1);
+		}, 1000);
+		return () => {
+			clearInterval(id);
+		};
+	}, [time_]);
+	if (time === "0") return <></>;
+	return (
+		<Stack
+			direction="row"
+			justifyContent={"flex-end"}
+			alignItems={"center"}
+		>
+			<Typography
+				sx={{
+					typography: {
+						fontFamily:
+							'"Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;',
+					},
+				}}
+				color="#20db1a"
+			>
+				{time_ ? convertStoH(time_) : ""}
+			</Typography>
+			<Clock style={{ marginLeft: 10, color: "#20db1a" }} />
+		</Stack>
+	);
+};
+
 const BattleGame = () => {
 	const { address, setAddress } = useContext(Address);
 	const [tokenId, setTokenId] = useState<string | undefined>();
@@ -155,6 +199,7 @@ const BattleGame = () => {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [isLoading, setIsLoading] = useState([false, false, false]);
 	const [open, setOpen] = useState(false);
+	const [timeResetTurn, setTimeResetTurn] = useState<string | undefined>();
 	const [resultModel, setResultModel] = useState<{
 		open: boolean;
 		status?: string;
@@ -183,6 +228,14 @@ const BattleGame = () => {
 			setNotify({
 				display: true,
 				text: "Please select ShibaFighter",
+				severity: "error",
+			});
+			return;
+		}
+		if (turn === "0") {
+			setNotify({
+				display: true,
+				text: "Turn is over",
 				severity: "error",
 			});
 			return;
@@ -230,6 +283,8 @@ const BattleGame = () => {
 			if (tokenId) {
 				const amountTurn = await getTurn(tokenId);
 				setTurn(amountTurn);
+				const timeOfToken = await getNowOfToken(tokenId);
+				setTimeResetTurn(timeOfToken);
 			}
 		};
 		asyncFunc();
@@ -238,11 +293,11 @@ const BattleGame = () => {
 	return (
 		<>
 			<Typography color={"error"} align="right">
-				Token Available:
+				ShibaF Available:
 				{balance ? `${Math.floor(Number(balance)) ?? 0}` : "..."}
 			</Typography>
 			<Typography color={"error"} align="right">
-				Token Game:
+				ShibaF Reward:
 				{balanceOfGame
 					? `${Math.floor(Number(balanceOfGame)) ?? 0}`
 					: "..."}
@@ -264,7 +319,6 @@ const BattleGame = () => {
 				{listZombie.map((l, k) => (
 					<Grid md={4} key={l.winRate + l.rarity}>
 						<Zombie
-							rarity={l.rarity}
 							order={l.order}
 							winRate={l.winRate}
 							keyAttack={k}
@@ -285,6 +339,7 @@ const BattleGame = () => {
 					>
 						Turn: {turn ?? 0}
 					</Typography>
+					<TimeResetTurn time={timeResetTurn} />
 					<Stack
 						direction={"row"}
 						justifyContent={"center"}

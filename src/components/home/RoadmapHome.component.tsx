@@ -8,7 +8,6 @@ const listRoadMap = [
 		phase: "Phase 1",
 		desc: [
 			"Community organic engagement on media socials.",
-			"Community organic engagement on media socials.",
 			"Whitepaper Creation.",
 			"Reputation system for members.",
 			"Release the first set of Shiba Fighter NFTs for players to mint and battle",

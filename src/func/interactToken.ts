@@ -35,17 +35,17 @@ export const approve = async (amount: number, address: string) => {
 	if (contractToken) {
 		try {
 			const balance = await getBalance(address);
-			if (Number(balance) < amount * 10000) {
+			if (Number(balance) < amount * 30000) {
 				return "Insufficient Token";
 			}
 			const allowanceAmount = await allowance(address);
-			if (Number(allowanceAmount) >= amount * 10000) {
+			if (Number(allowanceAmount) >= amount * 30000) {
 				return true;
 			}
 			await contractToken.methods
 				.approve(
 					NFT_CONTRACT,
-					web3.utils.toWei((balance ?? 10000000).toString(), "gwei")
+					web3.utils.toWei((100000).toString(), "gwei")
 				)
 				.send({
 					from: address,

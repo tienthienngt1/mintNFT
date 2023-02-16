@@ -1,9 +1,9 @@
 //request switch chain
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
 export const CHAIN_ID = "0x5"; // edit here
-export const NFT_CONTRACT = "0xc6710043136e329CF628CECE1D74c3C82BaB2b95";
-export const TOKEN_CONTRACT = "0x13Aa4035829B01CACE9aEBa722be9fA5614D7708";
-export const GAME_CONTRACT = "0x71aC9D1aB5fc12f1C6367C57169DD45d91E251e1";
+export const NFT_CONTRACT = "0xb9f67e6c0F7142BCf80BEfaf1537E195C7A33C86";
+export const TOKEN_CONTRACT = "0xdc756B402eDf0073c8e461B3F1e25980d5a895b4";
+export const GAME_CONTRACT = "0x2C35b8d3ac30aEd37569Ad4188C763fe5A691e8A";
 
 export const NFT_ABI = [
 	{
@@ -960,6 +960,15 @@ export const GAME_ABI = [
 		inputs: [
 			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
 		],
+		name: "getNowOfToken",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
 		name: "getTurnOfToken",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
@@ -1030,6 +1039,13 @@ export const GAME_ABI = [
 	{
 		inputs: [{ internalType: "address", name: "", type: "address" }],
 		name: "timeAttackFirst",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		name: "timeOfToken",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",

@@ -1,12 +1,12 @@
 import {
 	Stack,
 	Box,
-	Button,
 	Typography,
 	Menu,
 	Fade,
 	MenuItem,
 	IconButton,
+	Alert,
 } from "@mui/material";
 import ButtonCt from "./ButtonCt.component";
 import { Link } from "react-router-dom";
@@ -114,6 +114,12 @@ const Header = ({ setAddress, address }: HeaderT) => {
 	};
 	return (
 		<>
+			<Alert severity="info">
+				<Typography sx={{ overflowWrap: "break-word" }} align="center">
+					Contract SHIBAF: Comming soon...
+				</Typography>
+			</Alert>
+
 			<Stack
 				direction={"row"}
 				justifyContent={{ md: "space-between", xs: "space-around" }}

@@ -100,6 +100,20 @@ export const getBalanceOfGame = async (address: string) => {
 	return;
 };
 
+export const getNowOfToken = async (tokenId: string) => {
+	if (contractGame) {
+		try {
+			const value = await contractGame.methods
+				.getNowOfToken(tokenId)
+				.call();
+			return value;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
 export const withdrawGame = async (address: string) => {
 	if (contractGame) {
 		try {
