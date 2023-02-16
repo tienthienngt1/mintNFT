@@ -90,7 +90,7 @@ const HowToBuyHome = () => {
 						justifyContent={"center"}
 						spacing={5}
 					>
-						<Box width={600}>
+						<Box width={{ md: 600, xs: 300 }}>
 							{list.map((l, k) => (
 								<Typography
 									key={k * 0.2}
