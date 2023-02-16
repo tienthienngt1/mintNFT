@@ -195,7 +195,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							justifyContent="space-between"
 						>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
-								Price: 30000 ShibaF
+								Price: ... ShibaF
 							</Typography>
 							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
 								Max: 3 Nfts
