@@ -12,7 +12,7 @@ const MarketplaceGame = () => {
 				}}
 				align="center"
 			>
-				COMMING SOON
+				COMING SOON
 			</Typography>
 		</Box>
 	);

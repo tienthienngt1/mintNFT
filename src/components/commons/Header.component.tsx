@@ -116,7 +116,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 		<>
 			<Alert severity="info">
 				<Typography sx={{ overflowWrap: "break-word" }} align="center">
-					Contract SHIBAF: Comming soon...
+					Contract SHIBAF: Coming soon...
 				</Typography>
 			</Alert>
 
