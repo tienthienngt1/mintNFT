@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 const list = [
 	"How to buy on the Arbitrum chain?",
-	"1.You will need to first set up a compatible wallet that supports the Arbitrum network. Currently, the most popular wallet for Arbitrum is MetaMask, which can be downloaded as a browser extension or a mobile app.",
-	"2.Connect your MetaMask wallet to the Arbitrum network by following these steps:",
 	<>
 		Go to:{" "}
 		{
@@ -20,7 +18,7 @@ const list = [
 		}
 	</>,
 	"Connect your Metamask wallet and add Arbitrum One chain.",
-	"Buy some ETH on CEX (Binnace,..) and deposit ETH from CEX to metamask wallet via Arbitrum One network. Note that buying on the Arbitrum network may require you to pay gas fees (transaction fees) in ETH.",
+	" Buy some ETH on CEX (Binnace,..) and deposit ETH from CEX to metamask wallet via Arbitrum One network.",
 	<>
 		Go to:{" "}
 		{
