@@ -32,6 +32,19 @@ const InventoryGame = () => {
 				justifyContent={"center"}
 				alignItems={"center"}
 			>
+				{!address && (
+					<Typography
+						sx={{
+							typography: {
+								md: "h3",
+								xs: "h5",
+								color: "#e04545",
+							},
+						}}
+					>
+						Empty
+					</Typography>
+				)}
 				{!loading && (
 					<Grid container spacing={2}>
 						{tokenId ? (
