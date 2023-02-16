@@ -116,11 +116,14 @@ const IntroHome = () => {
 									color={"rgb(255,255,255,0.8)"}
 									gutterBottom
 								>
-									Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Soluta esse quod a libero
-									enim, doloremque explicabo expedita velit
-									corporis dolorum! Ducimus ex non voluptates
-									iure ab officia iusto. Repellendus, eum?
+									Get ready to enter the world of "Shiba
+									Fighter", where the blockchain meets the
+									arena in the ultimate GameFi and NFTFi
+									experience! Assemble your squad of powerful
+									and unique Shiba Fighter NFTs and train them
+									to battle against monsters in epic
+									competitions that will test your skills and
+									strategy.
 								</Typography>
 							</Tween>
 						</Reveal>
@@ -140,8 +143,12 @@ const IntroHome = () => {
 									color={"rgb(255,255,255,0.8)"}
 									gutterBottom
 								>
-									We are a P2E, and Utility based and driven
-									project.
+									Each Shiba Fighter NFT in your collection
+									has its own rank. As you fight and win
+									battles, you'll earn rewards that you can
+									use to upgrade your team, trade on the open
+									market, or even stake to earn passive
+									income.
 								</Typography>
 							</Tween>
 						</Reveal>
@@ -158,10 +165,32 @@ const IntroHome = () => {
 								delay={1}
 							>
 								<Typography color={"rgb(255,255,255,0.8)"}>
-									Currently ShibaFighter has collections
-									already minted on the Ethereum. Are you
-									ready to join the ranks of the ShibaFighter
-									army?
+									But "Shiba Fighter" is more than just a game
+									– it's a vibrant community of passionate
+									players who share a love for blockchain
+									technology and the joy of collecting and
+									battling with NFTs.
+								</Typography>
+							</Tween>
+						</Reveal>
+						<Reveal>
+							<Tween
+								from={{
+									opacity: 0,
+									y: 20,
+								}}
+								to={{
+									opacity: 1,
+									y: 0,
+								}}
+								delay={1}
+							>
+								<Typography color={"rgb(255,255,255,0.8)"}>
+									Join the battle today and become the
+									ultimate Shiba Fighter champion! With its
+									unparalleled combination of GameFi and
+									NFTFi, "Shiba Fighter" is the future of
+									gaming on the blockchain
 								</Typography>
 							</Tween>
 						</Reveal>

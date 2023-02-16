@@ -82,6 +82,19 @@ const MenuSmallScreen = () => {
 						Mint
 					</Link>
 				</MenuItem>
+				<MenuItem onClick={handleClose}>
+					<Link
+						to="https://docs.shibafighter.org/"
+						style={{
+							display: "flex",
+							gap: 10,
+							alignItems: "center",
+						}}
+						target="_blank"
+					>
+						WhitePaper
+					</Link>
+				</MenuItem>
 			</Menu>
 		</>
 	);
@@ -139,6 +152,12 @@ const Header = ({ setAddress, address }: HeaderT) => {
 							</Link>
 							<Link to="/mint">
 								<ButtonCt title="Mint" />
+							</Link>
+							<Link
+								to="https://docs.shibafighter.org/"
+								target="_blank"
+							>
+								<ButtonCt title="WhitePaper" />
 							</Link>
 						</>
 					)}

@@ -40,6 +40,7 @@ const TokenomicHome = () => {
 				>
 					<Typography
 						sx={{
+							marginTop: 10,
 							typography: {
 								md: "h4",
 								xs: "h4",

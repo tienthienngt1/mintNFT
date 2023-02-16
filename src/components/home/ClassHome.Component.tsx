@@ -56,11 +56,11 @@ const ClassHome = () => {
 							},
 						}}
 					>
-						CLASS
+						CLASSES
 					</Typography>
 					<img
 						src="/headingUnderline.svg"
-						width={150}
+						width={200}
 						style={{ marginBottom: "20px" }}
 					/>
 				</Tween>

@@ -6,19 +6,14 @@ import { Reveal, Tween } from "react-gsap";
 
 const link = [
 	{
-		url: "twitter",
+		url: "https://twitter.com/_ShibaFighter_",
 		name: "Twitter",
 		Icon: Twitter,
 	},
 	{
-		url: "telegram",
+		url: "https://t.me/shibafighter",
 		name: "Telegram",
 		Icon: Telegram,
-	},
-	{
-		url: "discord",
-		name: "Discord",
-		Icon: Discord,
 	},
 ];
 

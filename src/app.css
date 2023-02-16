@@ -241,7 +241,7 @@ div .dot {
 	background: linear-gradient(136deg, #5976f5 0%, #fc5347 100%);
 	cursor: pointer;
 	position: relative;
-	font-size: 25px;
+	font-size: 20px;
 	z-index: 0;
 	border-top-left-radius: 10px;
 	font-family: Rubik Mono One, sans-serif;

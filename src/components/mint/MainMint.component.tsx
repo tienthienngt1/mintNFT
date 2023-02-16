@@ -7,6 +7,7 @@ import {
 	TextField,
 	InputAdornment,
 	LinearProgress,
+	Button,
 } from "@mui/material";
 import { connectWallet } from "func/connectWallet";
 import { Address } from "layout/index.layout";
@@ -15,6 +16,7 @@ import Notify from "components/commons/Nofity.component";
 import { Reveal, Tween } from "react-gsap";
 import { LoadingButton } from "@mui/lab";
 import { approve } from "func/interactToken";
+import ButtonCt from "components/commons/ButtonCt.component";
 
 type MainMintT = {
 	status: boolean;
@@ -23,7 +25,7 @@ type MainMintT = {
 
 const MainMint = ({ setStatus, status }: MainMintT) => {
 	const { address, setAddress } = useContext(Address);
-	const [amount, setAmount] = useState<string | undefined>("");
+	const [amount, setAmount] = useState<number>(1);
 	const [isLoading, setLoading] = useState(false);
 	const [amountMinted, setAmountMinted] = useState<string | undefined>("");
 	const [totalSupply, setTotalSupply] = useState<string | undefined>("");
@@ -45,6 +47,14 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 			await handleConnect();
 		} else {
 			if (!amount) return;
+			if (amountMinted === "3") {
+				setNotify({
+					display: true,
+					text: "Exceed max mint per minter!",
+					severity: "error",
+				});
+				return;
+			}
 			let res;
 			setLoading(true);
 			const statusApprove = await approve(Number(amount), address);
@@ -62,7 +72,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 				severity: res?.status ? "success" : "error",
 			});
 			res && setStatus(!status);
-			setAmount("");
+			setAmount(0);
 			setLoading(false);
 		}
 	};
@@ -127,7 +137,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 						>
 							<Avatar
 								alt="logo"
-								src="/logo.jpg"
+								src="/backgroundLogo.jpg"
 								sx={{ width: 100, height: 100 }}
 							/>
 							<Typography
@@ -196,8 +206,8 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							id="outlined-start-adornment"
 							sx={{ my: 1, width: "100%" }}
 							focused
+							disabled
 							value={amount}
-							onChange={(e) => setAmount(e.target.value)}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
@@ -212,6 +222,38 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 												amountMinted ? amountMinted : 0
 											}/3)`}
 										</span>
+									</InputAdornment>
+								),
+								endAdornment: (
+									<InputAdornment position="end">
+										<Stack direction="column" spacing={0.2}>
+											<Button
+												variant="contained"
+												sx={{
+													padding: 0,
+													minWidth: 25,
+												}}
+												onClick={() => {
+													if (amount >= 3) return;
+													setAmount(amount + 1);
+												}}
+											>
+												+
+											</Button>
+											<Button
+												variant="contained"
+												sx={{
+													padding: 0,
+													minWidth: 25,
+												}}
+												onClick={() => {
+													if (amount <= 1) return;
+													setAmount(amount - 1);
+												}}
+											>
+												-
+											</Button>
+										</Stack>
 									</InputAdornment>
 								),
 							}}

@@ -13,13 +13,13 @@ const list = [
 		question: "How to play?",
 		answer: [
 			"You must own at least 1 NFT to play.",
-			"Have 5 class of NFT.",
-			"Each nft has a different number of hits in a day.",
-			"Common Nft has 3 turn.",
-			"Uncommon Nft has 4 turn.",
-			"Rare Nft has 5 turn.",
-			"UltraRare Nft has 6 turn.",
-			"Epic Nft has 7 turn.",
+			"Have 5 classes of NFT. Each nft has a different number of hits in a day.",
+			"Common Nft has 3 turn. Uncommon Nft has 4 turn. Rare Nft has 5 turn. UltraRare Nft has 6 turn. Epic Nft has 7 turn.",
+			"The bonus will not lock, you can withdraw at any time. But if you withdraw more than 5 days, there will be no fee. Less than 5 days fee will be calculated as follows:",
+			"Less than 2 days fee is 40%.",
+			"Less than 3 days fee is 30%.",
+			"Less than 4 days fee is 20%.",
+			"Less than 5 days fee is 10%.",
 		],
 	},
 	{
@@ -28,7 +28,7 @@ const list = [
 	},
 	{
 		question: "What if I lose?",
-		answer: ["You will get 50% reward."],
+		answer: ["You will get 20% reward."],
 	},
 	{
 		question: "How is the reward of each monster different?",
@@ -62,6 +62,7 @@ const FAQHome = () => {
 					delay={0.5}
 				>
 					<Typography
+						marginTop={10}
 						sx={{
 							typography: {
 								md: "h4",
@@ -97,11 +98,29 @@ const FAQHome = () => {
 							aria-controls="panel1a-content"
 							id="panel1a-header"
 						>
-							<Typography>{l.question}</Typography>
+							<Typography
+								sx={{
+									fontFamily:
+										'"Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;',
+									fontWeight: 400,
+									color: "#F87317",
+								}}
+							>
+								{l.question}
+							</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
 							{l.answer.map((a) => (
-								<Typography key={a}>{a}</Typography>
+								<Typography
+									key={a}
+									sx={{
+										fontFamily:
+											'"Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;',
+										fontWeight: 400,
+									}}
+								>
+									{a}
+								</Typography>
 							))}
 						</AccordionDetails>
 					</Accordion>
