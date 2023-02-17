@@ -5,11 +5,37 @@ import { getMyTokens } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
+import InventoryModalGame from "./InventoryModalGame.component";
+
+type ItemT = {
+	t: string;
+	k: number;
+};
+
+const ItemInventory = ({ t, k }: ItemT) => {
+	return (
+		<>
+			<Grid key={t + k} md={4} lg={3} sx={{ border: "1px solid red" }}>
+				<Nft tokenId={t} />
+			</Grid>
+		</>
+	);
+};
 
 const InventoryGame = () => {
 	const { address } = useContext(Address);
 	const [tokenId, setTokenId] = useState<string[] | undefined>();
+	const [tokenIdSelected, setTokenIdSelected] = useState<
+		string | undefined
+	>();
 	const [loading, setLoading] = useState(true);
+	const [isOpenModal, setOpenModal] = useState(false);
+
+	const handleSelect = (tokenIdSelected_: string) => () => {
+		setOpenModal(true);
+		setTokenIdSelected(tokenIdSelected_);
+	};
+
 	useEffect(() => {
 		if (!address) return;
 		const token = async () => {
@@ -23,6 +49,7 @@ const InventoryGame = () => {
 		};
 		token();
 	}, [address]);
+
 	return (
 		<>
 			<Stack
@@ -49,7 +76,12 @@ const InventoryGame = () => {
 					<Grid container spacing={2}>
 						{tokenId ? (
 							tokenId?.map((t, k) => (
-								<Grid key={t + k} md={4} lg={3}>
+								<Grid
+									key={t + k}
+									md={4}
+									lg={3}
+									onClick={handleSelect(t)}
+								>
 									<Nft tokenId={t} />
 								</Grid>
 							))
@@ -70,6 +102,11 @@ const InventoryGame = () => {
 					</Grid>
 				)}
 			</Stack>
+			<InventoryModalGame
+				tokenId={tokenIdSelected}
+				open={isOpenModal}
+				handleClose={() => setOpenModal(false)}
+			/>
 		</>
 	);
 };

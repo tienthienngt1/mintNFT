@@ -41,7 +41,7 @@ const list = [
 		answer: [
 			"Nft can transfer to orther wallet.",
 			"Nft is going to sell on marketplace ultill the marketplace is live.",
-			"Marketplace is comming soon.",
+			"Marketplace is coming soon.",
 		],
 	},
 ];

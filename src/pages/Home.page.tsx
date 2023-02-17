@@ -14,7 +14,7 @@ const Home = () => {
 	return (
 		<>
 			<IntroHome />
-			<HowToBuyHome />
+			{/* <HowToBuyHome /> */}
 			<ClassHome />
 			<TokenomicHome />
 			<AboutHome />
