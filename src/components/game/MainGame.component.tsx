@@ -10,6 +10,7 @@ import { Shop, ShopWindow } from "react-bootstrap-icons";
 import BattleGame from "./BattleGame.component";
 import InventoryGame from "./InventoryGame.component";
 import MarketplaceGame from "./MarketplaceGame.component";
+import Notify from "components/commons/Nofity.component";
 
 type NavT = {
 	alignment: string;
@@ -24,11 +25,7 @@ const Nav = ({ alignment, setAlignment }: NavT) => {
 		setAlignment(newAlignment);
 	};
 	return (
-		<Stack
-			direction="row"
-			justifyContent={"center"}
-			sx={{ marginBottom: 5 }}
-		>
+		<Stack direction="row" justifyContent={"center"} my={2}>
 			<ToggleButtonGroup
 				color="primary"
 				value={alignment}
@@ -86,6 +83,11 @@ const Nav = ({ alignment, setAlignment }: NavT) => {
 
 const MainGame = () => {
 	const [alignment, setAlignment] = useState("battle");
+	const [notify, setNotify] = useState<{
+		display: boolean;
+		text: string;
+		severity: "error" | "success";
+	}>({ display: false, text: "", severity: "error" });
 	return (
 		<>
 			<Nav alignment={alignment} setAlignment={setAlignment} />
@@ -94,8 +96,14 @@ const MainGame = () => {
 			) : alignment === "inventory" ? (
 				<InventoryGame />
 			) : (
-				<MarketplaceGame />
+				<MarketplaceGame setNotify={setNotify} />
 			)}
+			<Notify
+				display={notify.display}
+				text={notify.text}
+				severity={notify.severity}
+				handleClose={() => setNotify({ ...notify, display: false })}
+			/>
 		</>
 	);
 };

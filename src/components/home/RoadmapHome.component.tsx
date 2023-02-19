@@ -84,16 +84,33 @@ const RoadmapHome = () => {
 					/>
 				</Tween>
 			</Reveal>
-			<Grid container spacing={2} justifyContent={"center"}>
+			<Grid
+				container
+				spacing={2}
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+				}}
+			>
 				{listRoadMap.map((l) => (
-					<Grid md={4} lg={3} key={l.phase}>
+					<Grid
+						md={6}
+						lg={4}
+						xl={3}
+						key={l.phase}
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
 						<Box
 							sx={{
 								borderRadius: 5,
-								border: "1px solid #F87317",
+								backgroundImage: "url('/roadmap-frame.png')",
 							}}
-							height={"100%"}
-							p={2}
+							width={350}
+							height={450}
+							p={3}
 						>
 							<Typography
 								sx={{

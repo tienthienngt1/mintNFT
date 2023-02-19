@@ -1,5 +1,6 @@
 import { Typography, Box, Stack } from "@mui/material";
 import { Reveal, Tween } from "react-gsap";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const rarityLable = [
 	{
@@ -55,12 +56,11 @@ const AboutHome = () => {
 					/>
 				</Tween>
 			</Reveal>
-			<Stack
-				direction={{ md: "row", xs: "column" }}
+			<Grid
+				container
 				my={10}
 				spacing={3}
-				justifyContent={"center"}
-				alignItems={"center"}
+				sx={{ display: "flex", justifyContent: "center" }}
 			>
 				{rarityLable.map((r, k) => (
 					<Reveal key={r.desc}>
@@ -75,42 +75,55 @@ const AboutHome = () => {
 							}}
 							delay={0.5 * k}
 						>
-							<Box
-								width={300}
-								className={`container_rarity5 background_rarity5`}
-								sx={{
-									position: "relative",
-									borderRadius: 5,
-									overflow: "hidden",
-									":hover": {
-										cursor: "pointer",
-									},
-									paddingBottom: "10px",
-								}}
-							>
+							<Grid sm={6} md={4} lg={3}>
 								<Box
-									component="img"
-									src={r.avatar}
-									alt="image"
-									width={"100%"}
-								/>
-								<Typography
-									sx={{ p: 2, typography: {} }}
-									align="center"
+									sx={{
+										backgroundImage: "url('frame.png')",
+										backgroundPosition: "center",
+										backgroundRepeat: "no-repeat",
+										backgroundSize: "cover",
+										position: "relative",
+										borderRadius: 5,
+										overflow: "hidden",
+										":hover": {
+											cursor: "pointer",
+										},
+										padding: "10%",
+										paddingTop: "20%",
+										aspectRatio: "295/417",
+									}}
+									p={3}
 								>
-									{r.name}
-								</Typography>
-								<Typography
-									sx={{ p: 2, typography: {} }}
-									align="center"
-								>
-									{r.desc}
-								</Typography>
-							</Box>
+									<Box
+										sx={{
+											borderTopLeftRadius: 30,
+											borderTopRightRadius: 30,
+											overflow: "hidden",
+										}}
+									>
+										<Box
+											component="img"
+											src={r.avatar}
+											alt="image"
+											width={"100%"}
+										/>
+									</Box>
+									<Typography
+										align="center"
+										color={"white"}
+										sx={{ paddingTop: 2 }}
+									>
+										{r.name}
+									</Typography>
+									<Typography align="center" color={"white"}>
+										{r.desc}
+									</Typography>
+								</Box>
+							</Grid>
 						</Tween>
 					</Reveal>
 				))}
-			</Stack>
+			</Grid>
 		</>
 	);
 };

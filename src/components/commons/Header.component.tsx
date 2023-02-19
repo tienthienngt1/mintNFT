@@ -15,6 +15,8 @@ import { connectWallet } from "func/connectWallet";
 import { useMedia } from "react-use";
 import { useState } from "react";
 import { ThreeDotsVertical } from "react-bootstrap-icons";
+import Button1 from "./Button1.component";
+import Container from "@mui/material/Container";
 
 const MenuSmallScreen = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -106,7 +108,7 @@ type HeaderT = {
 };
 
 const Header = ({ setAddress, address }: HeaderT) => {
-	const width = useMedia("(max-width: 600px)");
+	const width = useMedia("(max-width: 900px)");
 	useEventEth({ address, setAddress });
 	const handleConnect = async () => {
 		const res = await connectWallet();
@@ -114,8 +116,15 @@ const Header = ({ setAddress, address }: HeaderT) => {
 	};
 	return (
 		<>
-			<Alert severity="info">
-				<Typography sx={{ overflowWrap: "break-word" }} align="center">
+			<Alert severity="warning" sx={{ my: 1 }}>
+				<Typography
+					sx={{
+						overflowWrap: "break-word",
+						fontFamily: "fantasy",
+						color: "rgb(0,0,0,0.7)",
+					}}
+					align="center"
+				>
 					Contract SHIBAF: Coming soon...
 				</Typography>
 			</Alert>
@@ -124,6 +133,16 @@ const Header = ({ setAddress, address }: HeaderT) => {
 				direction={"row"}
 				justifyContent={{ md: "space-between", xs: "space-around" }}
 				alignItems={"center"}
+				px={{ lg: 15, md: 2 }}
+				sx={{
+					aspectRatio: "1452/120",
+					backgroundPosition: "center",
+					backgroundSize: "cover",
+					backgroundImage: {
+						lg: "url('https://diggersworld.io/img/header-bg.png')",
+						xs: "none",
+					},
+				}}
 			>
 				<Link
 					to="/"
@@ -134,6 +153,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 						src="/backgroundLogo.jpg"
 						alt="logo"
 						width={80}
+						height={60}
 					/>
 					{!width && (
 						<Typography
@@ -154,20 +174,20 @@ const Header = ({ setAddress, address }: HeaderT) => {
 					{!width && (
 						<>
 							<Link to="/play">
-								<ButtonCt title="Play" />
+								<Button1 title="Play" />
 							</Link>
 							<Link to="/mint">
-								<ButtonCt title="Mint" />
+								<Button1 title="Mint" />
 							</Link>
 							<Link
 								to="https://docs.shibafighter.org/"
 								target="_blank"
 							>
-								<ButtonCt title="WhitePaper" />
+								<Button1 title="WhitePaper" />
 							</Link>
 						</>
 					)}
-					<ButtonCt
+					<Button1
 						onClick={handleConnect}
 						title={
 							address

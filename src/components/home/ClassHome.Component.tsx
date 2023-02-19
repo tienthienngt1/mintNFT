@@ -77,7 +77,29 @@ const ClassHome = () => {
 					}}
 					delay={0.5}
 				>
-					<div>
+					<div style={{ position: "relative" }}>
+						<Box
+							component="img"
+							src="/highlight.png"
+							sx={{
+								position: "absolute",
+								top: 0,
+								left: 0,
+								width: 400,
+								zIndex: -1,
+							}}
+						/>
+						<Box
+							component="img"
+							src="/highlight.png"
+							sx={{
+								position: "absolute",
+								top: 100,
+								right: 20,
+								width: 400,
+								zIndex: -1,
+							}}
+						/>
 						<Swiper
 							effect={"cards"}
 							grabCursor={true}

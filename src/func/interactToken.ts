@@ -1,4 +1,4 @@
-import { NFT_CONTRACT } from "config";
+import { GAME_CONTRACT, NFT_CONTRACT } from "config";
 import { initialContractToken } from "./initialContract";
 
 const { contractToken, web3 } = initialContractToken();
@@ -17,14 +17,43 @@ export const getBalance = async (address: string) => {
 	return;
 };
 
-export const allowance = async (address: string) => {
+export const allowance = async (address: string, to?: string) => {
 	if (contractToken) {
 		try {
 			const rarity = await contractToken.methods
-				.allowance(address, NFT_CONTRACT)
+				.allowance(address, to ? to : NFT_CONTRACT)
 				.call();
 			return web3.utils.fromWei(rarity.toString(), "gwei");
 		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const approveBuy = async (amount: number, address: string) => {
+	if (contractToken) {
+		try {
+			const balance = await getBalance(address);
+			if (Number(balance) < amount) {
+				return "Insufficient Token";
+			}
+			const allowanceAmount = await allowance(address, GAME_CONTRACT);
+			if (Number(allowanceAmount) >= amount) {
+				return true;
+			}
+			await contractToken.methods
+				.approve(
+					GAME_CONTRACT,
+					web3.utils.toWei((100000000).toString(), "gwei")
+				)
+				.send({
+					from: address,
+				});
+			return true;
+		} catch (error) {
+			console.log(error);
+
 			return;
 		}
 	}

@@ -1,26 +1,13 @@
 import { Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Nft } from "components/mint/CollectionMint.component";
 import { getMyTokens } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
 import InventoryModalGame from "./InventoryModalGame.component";
-
-type ItemT = {
-	t: string;
-	k: number;
-};
-
-const ItemInventory = ({ t, k }: ItemT) => {
-	return (
-		<>
-			<Grid key={t + k} md={4} lg={3} sx={{ border: "1px solid red" }}>
-				<Nft tokenId={t} />
-			</Grid>
-		</>
-	);
-};
+import Notify from "components/commons/Nofity.component";
+import { tokenIdListedByOwner } from "func/interactGame";
+import { Nft } from "components/commons/Nft.component";
 
 const InventoryGame = () => {
 	const { address } = useContext(Address);
@@ -30,6 +17,13 @@ const InventoryGame = () => {
 	>();
 	const [loading, setLoading] = useState(true);
 	const [isOpenModal, setOpenModal] = useState(false);
+	const [status, setStatus] = useState(false);
+
+	const [notify, setNotify] = useState<{
+		display: boolean;
+		text: string;
+		severity: "error" | "success";
+	}>({ display: false, text: "", severity: "error" });
 
 	const handleSelect = (tokenIdSelected_: string) => () => {
 		setOpenModal(true);
@@ -40,41 +34,36 @@ const InventoryGame = () => {
 		if (!address) return;
 		const token = async () => {
 			const res = await getMyTokens(address);
-			if (res.length > 0) {
-				setTokenId(sortArray(res));
-			} else {
-				setTokenId(undefined);
-			}
+			const _tokenIdListed = await tokenIdListedByOwner(address);
+			const token = res.concat(_tokenIdListed);
+			setTokenId(sortArray(token));
+
 			setLoading(false);
+			setOpenModal(false);
 		};
 		token();
-	}, [address]);
+	}, [address, status]);
 
 	return (
 		<>
-			<Stack
-				direction={{ md: "row", xs: "column" }}
-				my={10}
-				spacing={3}
-				justifyContent={"center"}
-				alignItems={"center"}
-			>
-				{!address && (
-					<Typography
-						sx={{
-							typography: {
-								md: "h3",
-								xs: "h5",
-								color: "#e04545",
-							},
-						}}
-					>
-						Empty
-					</Typography>
-				)}
-				{!loading && (
+			{!address && (
+				<Typography
+					sx={{
+						typography: {
+							md: "h3",
+							xs: "h5",
+							color: "#e04545",
+						},
+					}}
+					align="center"
+				>
+					Empty
+				</Typography>
+			)}
+			{!loading && (
+				<>
 					<Grid container spacing={2}>
-						{tokenId ? (
+						{tokenId && tokenId.length > 0 ? (
 							tokenId?.map((t, k) => (
 								<Grid
 									key={t + k}
@@ -82,7 +71,7 @@ const InventoryGame = () => {
 									lg={3}
 									onClick={handleSelect(t)}
 								>
-									<Nft tokenId={t} />
+									<Nft tokenId={t} status={status} />
 								</Grid>
 							))
 						) : (
@@ -95,17 +84,29 @@ const InventoryGame = () => {
 										color: "#e04545",
 									},
 								}}
+								align="center"
 							>
 								Empty
 							</Typography>
 						)}
 					</Grid>
-				)}
-			</Stack>
+				</>
+			)}
+
 			<InventoryModalGame
 				tokenId={tokenIdSelected}
 				open={isOpenModal}
 				handleClose={() => setOpenModal(false)}
+				address={address}
+				setNotify={setNotify}
+				setStatus={setStatus}
+				status={status}
+			/>
+			<Notify
+				display={notify.display}
+				text={notify.text}
+				severity={notify.severity}
+				handleClose={() => setNotify({ ...notify, display: false })}
 			/>
 		</>
 	);

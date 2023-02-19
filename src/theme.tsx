@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { red, pink } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 
 // A custom theme for this app
 const theme = createTheme({
@@ -14,12 +14,14 @@ const theme = createTheme({
 			main: red.A400,
 		},
 		background: {
-			default: "#302828",
+			default: "#52504e",
 		},
 	},
 	typography: {
-		// fontFamily: ["Concert One", "cursive"].join(","),
 		fontFamily: ["Rubik Mono One", "sans-serif"].join(","),
+		allVariants: {
+			color: "white",
+		},
 	},
 });
 

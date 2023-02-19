@@ -1,4 +1,4 @@
-import { NFT_ABI, NFT_CONTRACT } from "config";
+import { GAME_CONTRACT, NFT_ABI, NFT_CONTRACT } from "config";
 import { initialContractNft } from "./initialContract";
 import Web3 from "web3";
 const { contractNft, web3 } = initialContractNft();
@@ -43,6 +43,20 @@ export const getQtyOfMinter = async (address: string) => {
 	return;
 };
 
+export const isAprovedForAll = async (address: string) => {
+	if (contractNft) {
+		try {
+			const rarity = await contractNft.methods
+				.isApprovedForAll(address, GAME_CONTRACT)
+				.call();
+			return rarity;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
 export const getTotalSupply = async () => {
 	const web3 = new Web3(
 		new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli")
@@ -59,7 +73,6 @@ export const getTotalSupply = async () => {
 	} catch (error) {
 		return;
 	}
-	return;
 };
 
 export const mint = async (address: string, amount: number) => {
@@ -68,6 +81,43 @@ export const mint = async (address: string, amount: number) => {
 			const res = await contractNft.methods.mint(amount).send({
 				from: address,
 			});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const setApprovalForAll = async (address?: string) => {
+	if (!address) return;
+	if (contractNft) {
+		try {
+			const res = await contractNft.methods
+				.setApprovalForAll(GAME_CONTRACT, true)
+				.send({
+					from: address,
+				});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const transferFrom = async (
+	address: string,
+	to: string,
+	tokenId: string
+) => {
+	if (contractNft) {
+		try {
+			const res = await contractNft.methods
+				.transferFrom(address, to, tokenId)
+				.send({
+					from: address,
+				});
 			return res;
 		} catch (error) {
 			return;

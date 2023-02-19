@@ -1,5 +1,3 @@
-import { Button, ButtonTypeMap, ExtendButtonBase } from "@mui/material";
-
 const Background = () => {
 	return (
 		<div className="wrapper">

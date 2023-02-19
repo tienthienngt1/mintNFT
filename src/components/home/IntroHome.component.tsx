@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import Button1 from "components/commons/Button1.component";
 import ButtonCustom from "components/commons/ButtonCustom.component";
 import { useEffect, useState } from "react";
 import { Tween, Reveal } from "react-gsap";
@@ -67,7 +68,24 @@ const IntroHome = () => {
 						</Stack>
 					</Grid>
 				</Tween>
-				<Grid md={7}>
+				<Grid
+					md={7}
+					sx={{
+						position: "relative",
+					}}
+				>
+					<Box
+						component="img"
+						src="/highlight.png"
+						sx={{
+							position: "absolute",
+							top: 0,
+							left: 0,
+							width: "100%",
+							zIndex: 0,
+						}}
+					/>
+
 					<Stack py={10} px={2}>
 						<Reveal>
 							<Tween
@@ -222,7 +240,7 @@ const IntroHome = () => {
 									delay={1}
 								>
 									<Link to="/play">
-										<ButtonCustom title={"Play"} />
+										<Button1 title={"Play"} />
 									</Link>
 								</Tween>
 							</Reveal>
@@ -241,7 +259,7 @@ const IntroHome = () => {
 									delay={1}
 								>
 									<Link to="/mint">
-										<ButtonCustom title={"Mint Now"} />
+										<Button1 title={"Mint Now"} />
 									</Link>
 								</Tween>
 							</Reveal>

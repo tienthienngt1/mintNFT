@@ -3,6 +3,8 @@ import Typography from "@mui/material/Typography";
 import { Discord, Telegram, Twitter } from "react-bootstrap-icons";
 import ButtonCt from "./ButtonCt.component";
 import { Reveal, Tween } from "react-gsap";
+import Button1 from "./Button1.component";
+import Container from "@mui/material/Container";
 
 const link = [
 	{
@@ -19,8 +21,8 @@ const link = [
 
 const Footer = () => {
 	return (
-		<>
-			<Box sx={{ marginTop: 30 }}>
+		<Container maxWidth={false}>
+			<Box sx={{ marginTop: 20 }}>
 				<Stack
 					direction={"row"}
 					justifyContent={"center"}
@@ -41,7 +43,7 @@ const Footer = () => {
 								delay={0.5 * k}
 							>
 								<a href={l.url} target="_blank">
-									<ButtonCt
+									<Button1
 										title={
 											<>
 												<l.Icon
@@ -81,7 +83,7 @@ const Footer = () => {
 					</Tween>
 				</Reveal>
 			</Box>
-		</>
+		</Container>
 	);
 };
 

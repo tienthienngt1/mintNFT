@@ -72,6 +72,72 @@ export const getResult = async (tokenId: string) => {
 	return;
 };
 
+export const allNftListed = async () => {
+	if (contractGame) {
+		try {
+			const price = await contractGame.methods.tokenIdListed().call();
+			return price;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const allNftListedByPrice = async () => {
+	if (contractGame) {
+		try {
+			const price = await contractGame.methods.priceListed().call();
+			return price;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const isListByTokenId = async (tokenId: string) => {
+	if (contractGame) {
+		try {
+			const bool = await contractGame.methods
+				.isListByTokenId(tokenId)
+				.call();
+			return bool;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const tokenIdListedByOwner = async (address: string) => {
+	if (contractGame) {
+		try {
+			const bool = await contractGame.methods
+				.getAllOfToken(address)
+				.call();
+			return bool;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const getInfoTokenListed = async (tokenId: string) => {
+	if (contractGame) {
+		try {
+			const value = await contractGame.methods
+				.getInfoTokenListed(tokenId)
+				.call();
+			return value;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
 export const getValue = async (tokenId: string) => {
 	if (contractGame) {
 		try {
@@ -118,6 +184,50 @@ export const withdrawGame = async (address: string) => {
 	if (contractGame) {
 		try {
 			const res = await contractGame.methods.withdraw().send({
+				from: address,
+			});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const sell = async (address: string, tokenId: string, price: string) => {
+	if (contractGame) {
+		try {
+			const res = await contractGame.methods
+				.sell(tokenId, web3.utils.toWei(price, "Gwei"))
+				.send({
+					from: address,
+				});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const cancel = async (address: string, tokenId: string) => {
+	if (contractGame) {
+		try {
+			const res = await contractGame.methods.cancel(tokenId).send({
+				from: address,
+			});
+			return res;
+		} catch (error) {
+			return;
+		}
+	}
+	return;
+};
+
+export const buy = async (address: string, tokenId: string) => {
+	if (contractGame) {
+		try {
+			const res = await contractGame.methods.buy(tokenId).send({
 				from: address,
 			});
 			return res;

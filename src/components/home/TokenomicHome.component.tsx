@@ -67,21 +67,21 @@ const TokenomicHome = () => {
 							sx={{ height: "100%" }}
 						>
 							<Typography
-								sx={{ color: "#cb3232" }}
+								sx={{ color: "rgba(255, 99, 132)" }}
 								align="right"
 								gutterBottom
 							>
 								Liquidity Pool: 60%
 							</Typography>
 							<Typography
-								sx={{ color: "#cb3232" }}
+								sx={{ color: "rgba(54, 162, 235)" }}
 								align="right"
 								gutterBottom
 							>
 								Game Pool: 20%
 							</Typography>
 							<Typography
-								sx={{ color: "#cb3232" }}
+								sx={{ color: "rgba(255, 206, 86)" }}
 								align="right"
 								gutterBottom
 							>

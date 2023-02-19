@@ -1,76 +1,12 @@
 import { Box, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { getMyTokens, getRarityOfTokenId } from "func/interactNft";
+import { Nft } from "components/commons/Nft.component";
+import { getMyTokens } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
 import { useContext, useEffect, useState } from "react";
 import { Reveal, Tween } from "react-gsap";
-
-const rarityLable = ["common", "uncommon", "rare", "ultra rare", "Epic"];
-
-type NftT = {
-	tokenId: string;
-};
-
-const logoOfRarity = [
-	"common.jpg",
-	"uncommon.jpg",
-	"rare.jpg",
-	"ultrarare.jpg",
-	"epic.jpg",
-];
-
-export const Nft = ({ tokenId }: NftT) => {
-	const [rarity, setRarity] = useState<string | undefined>();
-	useEffect(() => {
-		const getfunc = async () => {
-			const res = await getRarityOfTokenId(tokenId);
-			setRarity(res);
-		};
-		getfunc();
-	}, [tokenId]);
-
-	return (
-		<Box
-			sx={{
-				position: "relative",
-				overflow: "hidden",
-				":hover": {
-					cursor: "pointer",
-				},
-			}}
-		>
-			<Box
-				component="img"
-				src={logoOfRarity[Number(rarity) - 1]}
-				alt="image"
-				width={"100%"}
-			/>
-			<Typography
-				sx={{ p: 2, typography: { color: "rgb(255,255,255,0.6)" } }}
-			>
-				ShibaFighter #{tokenId}
-			</Typography>
-			<small
-				className={`text_rarity${rarity}`}
-				style={{
-					position: "absolute",
-					top: 5,
-					left: 5,
-					padding: "1px 10px",
-					fontWeight: 600,
-					borderBottomLeftRadius: 10,
-					borderBottomRightRadius: 10,
-					textTransform: "uppercase",
-					color: "#fff",
-				}}
-			>
-				{rarityLable[Number(rarity) - 1]}
-			</small>
-		</Box>
-	);
-};
 
 type CollectionMintT = {
 	status: boolean;
@@ -148,7 +84,7 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 										}}
 										delay={0.5 * k}
 									>
-										<Nft tokenId={t} />
+										<Nft tokenId={t} status={false} />
 									</Tween>
 								</Reveal>
 							</Grid>

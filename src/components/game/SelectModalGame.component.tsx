@@ -4,13 +4,11 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { sortArray } from "func/sortArray";
 import { getMyTokens } from "func/interactNft";
-import { Address } from "layout/index.layout";
-import { Nft } from "components/mint/CollectionMint.component";
-import { useEventEth } from "hooks/useEventEth";
 import { Radio, Stack } from "@mui/material";
+import { Nft } from "components/commons/Nft.component";
 
 const style = {
 	position: "absolute" as "absolute",
@@ -109,7 +107,7 @@ export default function SelectModalGame({
 										xs={12}
 										md={4}
 									>
-										<Nft tokenId={t} />
+										<Nft tokenId={t} status={false} />
 										<Stack
 											direction={"row"}
 											justifyContent={"center"}

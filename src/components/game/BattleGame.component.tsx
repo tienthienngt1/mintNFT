@@ -3,7 +3,7 @@ import { LoadingButton, timelineClasses } from "@mui/lab";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState, useContext, useEffect } from "react";
 import SelectModalGame from "./SelectModalGame.component";
-import { Nft } from "components/mint/CollectionMint.component";
+import { Nft } from "components/commons/Nft.component";
 import { Address } from "layout/index.layout";
 import { useEventEth } from "hooks/useEventEth";
 import Notify from "components/commons/Nofity.component";
@@ -22,6 +22,9 @@ import { getBalance } from "func/interactToken";
 import ResultModalGame from "./ResultModalGame.component";
 import { Clock } from "react-bootstrap-icons";
 import { convertStoH } from "func/convertStoH";
+import Button1 from "components/commons/Button1.component";
+import Button2 from "components/commons/Button2.component";
+import Container from "@mui/material/Container";
 
 type ZombieT = {
 	isLoading: boolean[];
@@ -55,16 +58,13 @@ const Zombie = ({
 				}}
 			>
 				<Box component="img" src={url} alt="image" width={"100%"} />
-				<Typography
-					sx={{ p: 2, typography: { color: "rgb(255,255,255,0.6)" } }}
-				>
+				<Typography sx={{ p: 2 }}>
 					{`Shiba Zombie #${order}`}
 				</Typography>
 				<Stack direction="row" justifyContent="space-between">
 					<Typography
 						sx={{
 							p: 2,
-							typography: { color: "rgb(255,255,255,0.6)" },
 						}}
 					>
 						Win Rate:
@@ -72,7 +72,7 @@ const Zombie = ({
 					<Typography
 						sx={{
 							p: 2,
-							typography: { color: "#f02f4f" },
+							typography: { color: "#F93D14" },
 						}}
 					>
 						{`${winRate}%`}
@@ -82,7 +82,6 @@ const Zombie = ({
 					<Typography
 						sx={{
 							p: 2,
-							typography: { color: "rgb(255,255,255,0.6)" },
 						}}
 					>
 						Turn:
@@ -90,7 +89,7 @@ const Zombie = ({
 					<Typography
 						sx={{
 							p: 2,
-							typography: { color: "#f02f4f" },
+							typography: { color: "#F93D14" },
 						}}
 					>
 						{`-${turn}`}
@@ -98,11 +97,12 @@ const Zombie = ({
 				</Stack>
 				<Stack direction="row" justifyContent={"center"}>
 					<LoadingButton
-						variant="contained"
+						className="button1"
 						loading={isLoading[keyAttack]}
-						color={"error"}
 						onClick={() => handleAttack(keyAttack)}
 						sx={{
+							p: 1.5,
+							color: "white",
 							"&.Mui-disabled": {
 								backgroundColor: "#f86c84",
 							},
@@ -292,46 +292,56 @@ const BattleGame = () => {
 
 	return (
 		<>
-			<Typography color={"error"} align="right">
-				ShibaF Available:
-				{balance ? `${Math.floor(Number(balance)) ?? 0}` : "..."}
-			</Typography>
-			<Typography color={"error"} align="right">
-				ShibaF Reward:
-				{balanceOfGame
-					? `${Math.floor(Number(balanceOfGame)) ?? 0}`
-					: "..."}
-			</Typography>
-			<Stack
-				direction="row"
-				justifyContent={"flex-end"}
-				sx={{ marginBottom: 3 }}
+			<Container
+				maxWidth={false}
+				sx={{
+					backgroundImage: "url('/battle-bg.jpg')",
+					backgroundSize: "cover",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "center",
+				}}
 			>
-				<Button
-					variant="contained"
-					color="error"
-					onClick={handleWithdraw}
+				<Typography color={"error"} align="right">
+					ShibaF Available:
+					{balance ? `${Math.floor(Number(balance)) ?? 0}` : "..."}
+				</Typography>
+				<Typography color={"error"} align="right">
+					ShibaF Reward:
+					{balanceOfGame
+						? `${Math.floor(Number(balanceOfGame)) ?? 0}`
+						: "..."}
+				</Typography>
+				<Stack
+					direction="row"
+					justifyContent={"flex-end"}
+					sx={{ marginBottom: 3 }}
 				>
-					Withdraw
-				</Button>
-			</Stack>
-			<Grid container spacing={2}>
-				{listZombie.map((l, k) => (
-					<Grid md={4} key={l.winRate + l.rarity}>
-						<Zombie
-							order={l.order}
-							winRate={l.winRate}
-							keyAttack={k}
-							isLoading={isLoading}
-							handleAttack={handleAttack}
-							turn={l.turn}
-							url={l.url}
-						/>
-					</Grid>
-				))}
-			</Grid>
+					<Button
+						className="button1"
+						sx={{ p: 1.5, color: "white" }}
+						onClick={handleWithdraw}
+					>
+						Withdraw
+					</Button>
+				</Stack>
+				<Grid container spacing={2}>
+					{listZombie.map((l, k) => (
+						<Grid md={4} key={l.winRate + l.rarity}>
+							<Zombie
+								order={l.order}
+								winRate={l.winRate}
+								keyAttack={k}
+								isLoading={isLoading}
+								handleAttack={handleAttack}
+								turn={l.turn}
+								url={l.url}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			</Container>
 			{tokenId && (
-				<>
+				<Container maxWidth={false}>
 					<Typography
 						align="right"
 						sx={{ marginTop: 5 }}
@@ -346,19 +356,20 @@ const BattleGame = () => {
 						sx={{ marginTop: 5 }}
 					>
 						<Box width={380}>
-							<Nft tokenId={tokenId} />
+							<Nft tokenId={tokenId} status={false} />
 						</Box>
 					</Stack>
-				</>
+				</Container>
 			)}
 			<Stack
 				direction={"row"}
 				justifyContent={"center"}
 				sx={{ marginTop: 10 }}
 			>
-				<Button variant="contained" color="error" onClick={handleOpen}>
-					{tokenId ? "Change" : "Select ShibaFighter"}
-				</Button>
+				<Button1
+					title={tokenId ? "Change" : "Select ShibaFighter"}
+					onClick={handleOpen}
+				/>
 			</Stack>
 			<SelectModalGame
 				open={open}

@@ -1,9 +1,9 @@
 //request switch chain
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
-export const CHAIN_ID = "0x5"; // edit here
-export const NFT_CONTRACT = "0xb9f67e6c0F7142BCf80BEfaf1537E195C7A33C86";
-export const TOKEN_CONTRACT = "0xdc756B402eDf0073c8e461B3F1e25980d5a895b4";
-export const GAME_CONTRACT = "0x2C35b8d3ac30aEd37569Ad4188C763fe5A691e8A";
+export const CHAIN_ID = "0x38"; // edit here
+export const NFT_CONTRACT = "0x42948b52d8EC33101eC2AcEC49404a87fa122544";
+export const TOKEN_CONTRACT = "0x963856728b797D8CE7CA9d3590BE98C39793fa5D";
+export const GAME_CONTRACT = "0x4EC779FBe4B4dB6Af00f38B730b981115a708021";
 
 export const NFT_ABI = [
 	{
@@ -950,10 +950,52 @@ export const GAME_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "buy",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "cancel",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
 		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
 		name: "depositPoolGame",
 		outputs: [],
 		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "address", name: "_address", type: "address" },
+		],
+		name: "getAllOfToken",
+		outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "getInfoTokenListed",
+		outputs: [
+			{ internalType: "address", name: "", type: "address" },
+			{ internalType: "uint256", name: "", type: "uint256" },
+			{ internalType: "uint256", name: "", type: "uint256" },
+			{ internalType: "uint256", name: "", type: "uint256" },
+			{ internalType: "uint256", name: "", type: "uint256" },
+		],
+		stateMutability: "view",
 		type: "function",
 	},
 	{
@@ -978,9 +1020,27 @@ export const GAME_ABI = [
 		inputs: [
 			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
 		],
+		name: "isListByTokenId",
+		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
 		name: "largeAttack",
 		outputs: [],
 		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+		],
+		name: "lastSaleByTokenId",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
 		type: "function",
 	},
 	{
@@ -996,6 +1056,13 @@ export const GAME_ABI = [
 		inputs: [],
 		name: "owner",
 		outputs: [{ internalType: "address", name: "", type: "address" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "priceListed",
+		outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
 		stateMutability: "view",
 		type: "function",
 	},
@@ -1018,6 +1085,16 @@ export const GAME_ABI = [
 		name: "resultLastOfToken",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "uint256", name: "_tokenId", type: "uint256" },
+			{ internalType: "uint256", name: "_price", type: "uint256" },
+		],
+		name: "sell",
+		outputs: [],
+		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
@@ -1051,6 +1128,13 @@ export const GAME_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [],
+		name: "tokenIdListed",
+		outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
 		inputs: [
 			{ internalType: "address", name: "newOwner", type: "address" },
 		],
@@ -1062,6 +1146,13 @@ export const GAME_ABI = [
 	{
 		inputs: [],
 		name: "withdraw",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+		name: "withdrawNft",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
