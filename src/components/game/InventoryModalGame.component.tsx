@@ -58,6 +58,7 @@ export default function InvetoryModalGame({
 	const [isListed, setListed] = useState(false);
 	const [value, setValue] = useState<string>("");
 	const [loading, setLoading] = useState(true);
+
 	const handle = async () => {
 		if (!address || !tokenId) return;
 		if (!value) return;
@@ -69,17 +70,15 @@ export default function InvetoryModalGame({
 			setNotify({
 				display: true,
 				text: flag ? "Sell Successfully" : "Error",
-				severity: "success",
+				severity: flag ? "success" : "error",
 			});
 		} else {
 			const res = await transferFrom(address, value, tokenId);
-			if (res) {
-				setNotify({
-					display: true,
-					text: "Transfer successfully",
-					severity: "success",
-				});
-			}
+			setNotify({
+				display: true,
+				text: res ? "Transfer Successfully" : "Error",
+				severity: res ? "success" : "error",
+			});
 		}
 		handleClose();
 		setStatus(!status);
@@ -113,12 +112,14 @@ export default function InvetoryModalGame({
 			return;
 		}
 		setLoadingButton(true);
-		await setApprovalForAll(address);
-		setNotify({
-			display: true,
-			text: "Approval Successfully",
-			severity: "success",
-		});
+		const _isApprove = await setApprovalForAll(address);
+		if (_isApprove) {
+			setNotify({
+				display: true,
+				text: "Approval Successfully",
+				severity: "success",
+			});
+		}
 		setLoadingButton(false);
 		setApprovalAll(true);
 	};
@@ -151,7 +152,11 @@ export default function InvetoryModalGame({
 				}}
 			>
 				<Fade in={open}>
-					<Box sx={style} width={{ md: 700, xs: 400 }}>
+					<Box
+						className="hidden-bar"
+						sx={style}
+						width={{ md: 700, xs: 400 }}
+					>
 						{!loading && (
 							<>
 								<Stack
@@ -170,9 +175,12 @@ export default function InvetoryModalGame({
 									{isListed ? (
 										<LoadingButton
 											onClick={handleCancel}
-											color="error"
-											variant="contained"
-											sx={{ my: 2 }}
+											sx={{
+												my: 2,
+												p: 1.5,
+												color: "white",
+											}}
+											className="button1"
 											loading={isLoadingButton}
 										>
 											Cancel
@@ -242,11 +250,10 @@ export default function InvetoryModalGame({
 												{alignment === "sell" && (
 													<LoadingButton
 														onClick={handleApproval}
-														color="error"
-														variant="contained"
 														loading={
 															isLoadingButton
 														}
+														className="button1"
 														disabled={isApprovalAll}
 													>
 														Approve All
@@ -254,10 +261,13 @@ export default function InvetoryModalGame({
 												)}
 												<LoadingButton
 													onClick={handle}
-													color="error"
-													variant="contained"
+													sx={{
+														color: "white",
+														p: 1.5,
+													}}
 													loading={isLoadingButton}
 													disabled={!isApprovalAll}
+													className="button1"
 												>
 													{alignment === "sell"
 														? "Sell"

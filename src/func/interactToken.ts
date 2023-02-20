@@ -74,7 +74,7 @@ export const approve = async (amount: number, address: string) => {
 			await contractToken.methods
 				.approve(
 					NFT_CONTRACT,
-					web3.utils.toWei((100000).toString(), "gwei")
+					web3.utils.toWei((100000000).toString(), "gwei")
 				)
 				.send({
 					from: address,

@@ -5,6 +5,8 @@ import {
 	GAME_CONTRACT,
 	NFT_CONTRACT,
 	TOKEN_CONTRACT,
+	FAUCET_ABI,
+	FAUCET_CONTRACT,
 } from "config";
 import Web3 from "web3";
 declare var window: any;
@@ -54,4 +56,16 @@ export const initialContractToken = () => {
 		return { contractToken, web3 };
 	}
 	return { contractToken: undefined, web3 };
+};
+export const initialContractFaucet = () => {
+	const web3 = web3Func();
+	if (web3) {
+		const contractFaucet = new web3.eth.Contract(
+			//@ts-ignore
+			FAUCET_ABI,
+			FAUCET_CONTRACT
+		);
+		return { contractFaucet, web3 };
+	}
+	return { contractFaucet: undefined, web3 };
 };

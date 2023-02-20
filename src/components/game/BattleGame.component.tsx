@@ -23,8 +23,8 @@ import ResultModalGame from "./ResultModalGame.component";
 import { Clock } from "react-bootstrap-icons";
 import { convertStoH } from "func/convertStoH";
 import Button1 from "components/commons/Button1.component";
-import Button2 from "components/commons/Button2.component";
 import Container from "@mui/material/Container";
+import { faucet } from "func/interactFaucet";
 
 type ZombieT = {
 	isLoading: boolean[];
@@ -315,7 +315,26 @@ const BattleGame = () => {
 					direction="row"
 					justifyContent={"flex-end"}
 					sx={{ marginBottom: 3 }}
+					spacing={3}
 				>
+					<Button
+						className="button1"
+						sx={{ p: 1.5, color: "white" }}
+						onClick={async () => {
+							if (!address) return;
+							const res = await faucet(address);
+							if (res) {
+								setNotify({
+									display: true,
+									text: "You got 100,000 ShibaF",
+									severity: "success",
+								});
+								setToggleStatus(!toggleStatus);
+							}
+						}}
+					>
+						Faucet
+					</Button>
 					<Button
 						className="button1"
 						sx={{ p: 1.5, color: "white" }}

@@ -16,7 +16,6 @@ import Notify from "components/commons/Nofity.component";
 import { Reveal, Tween } from "react-gsap";
 import { LoadingButton } from "@mui/lab";
 import { approve } from "func/interactToken";
-import ButtonCt from "components/commons/ButtonCt.component";
 
 type MainMintT = {
 	status: boolean;
@@ -59,6 +58,11 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 			setLoading(true);
 			const statusApprove = await approve(Number(amount), address);
 			if (statusApprove === true) {
+				setNotify({
+					display: true,
+					text: "Approve successfully",
+					severity: "success",
+				});
 				res = await mint(address, Number(amount));
 			}
 			setNotify({
@@ -67,7 +71,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 					typeof statusApprove === "string"
 						? statusApprove
 						: res?.status
-						? "Mint successfull"
+						? "Mint successfully"
 						: "Error",
 				severity: res?.status ? "success" : "error",
 			});
@@ -95,7 +99,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 
 	return (
 		<>
-			<Reveal>
+			<Reveal trigger={null}>
 				<Tween
 					from={{
 						opacity: 0,
@@ -112,8 +116,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 						sx={{
 							padding: "30px 20px",
 							borderRadius: 5,
-							background:
-								"linear-gradient(135deg, #5976f5 0%, #fc5347 100%)",
+							boxShadow: `0px 0px 40px 0px #cb3232`,
 						}}
 						width={{ lg: 570, md: 470, xs: 400 }}
 					>
@@ -133,7 +136,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 						<Stack
 							direction={"row"}
 							alignItems="center"
-							justifyContent="space-between"
+							justifyContent="space-around"
 						>
 							<Avatar
 								alt="logo"
@@ -175,9 +178,10 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 									style={{
 										position: "absolute",
 										color: "rgb(0,0,0,0.6)",
-										top: 0,
+										top: 1,
 										fontSize: 13,
-										right: "25%",
+										right: "50%",
+										transform: "translate(50%,0)",
 									}}
 								>
 									{`${
@@ -194,28 +198,31 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							direction={{ md: "row", xs: "column" }}
 							justifyContent="space-between"
 						>
-							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
+							<Typography gutterBottom>
 								Price: ... ShibaF
 							</Typography>
-							<Typography gutterBottom color={"rgb(0,0,0,0.6)"}>
-								Max: 3 Nfts
-							</Typography>
+							<Typography gutterBottom>Max: 3 Nfts</Typography>
 						</Stack>
 						<TextField
 							label="Amount"
 							id="outlined-start-adornment"
-							sx={{ my: 1, width: "100%" }}
-							focused
-							disabled
+							sx={{
+								my: 1,
+								width: "100%",
+								"&.Mui-disabled": { color: "white" },
+								borderColor: "white",
+							}}
 							value={amount}
 							InputProps={{
+								style: { color: "white" },
+								readOnly: true,
 								startAdornment: (
 									<InputAdornment position="start">
 										<span
 											style={{
 												marginLeft: 10,
-												color: "rgb(0,0,0,0.5)",
 												fontSize: 16,
+												color: "white",
 											}}
 										>
 											{`(${
@@ -229,6 +236,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 										<Stack direction="column" spacing={0.2}>
 											<Button
 												variant="contained"
+												color="error"
 												sx={{
 													padding: 0,
 													minWidth: 25,
@@ -242,9 +250,11 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 											</Button>
 											<Button
 												variant="contained"
+												color="error"
 												sx={{
 													padding: 0,
 													minWidth: 25,
+													color: "white",
 												}}
 												onClick={() => {
 													if (amount <= 1) return;
@@ -266,8 +276,8 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							<LoadingButton
 								loading={isLoading}
 								onClick={handleMint}
-								variant={"contained"}
-								sx={{ background: "#A27BB6" }}
+								className="button1"
+								sx={{ p: 1.5 }}
 							>
 								{address ? "Mint" : "Connect Wallet"}
 							</LoadingButton>

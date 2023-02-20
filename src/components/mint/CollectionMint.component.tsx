@@ -72,21 +72,7 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 					{tokenId ? (
 						tokenId?.map((t, k) => (
 							<Grid key={t + k} md={4} lg={3}>
-								<Reveal>
-									<Tween
-										from={{
-											opacity: 0,
-											y: 20,
-										}}
-										to={{
-											opacity: 1,
-											y: 0,
-										}}
-										delay={0.5 * k}
-									>
-										<Nft tokenId={t} status={false} />
-									</Tween>
-								</Reveal>
+								<Nft tokenId={t} status={false} />
 							</Grid>
 						))
 					) : (

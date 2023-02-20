@@ -13,39 +13,6 @@ footer {
 	bottom: 0;
 	z-index: -1;
 }
-.clouds {
-	position: relative;
-}
-.clouds img {
-	animation: cloud calc(8s * var(--i)) linear infinite;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 1;
-}
-.clouds img:nth-child(1) {
-	--i: 1;
-}
-.clouds img:nth-child(2) {
-	--i: 2;
-}
-.clouds img:nth-child(3) {
-	--i: 3;
-}
-.clouds img:nth-child(4) {
-	--i: 4;
-}
-.clouds img:nth-child(5) {
-	--i: 5;
-}
-@keyframes cloud {
-	0% {
-		transform: translateX(-100%);
-	}
-	100% {
-		transform: translateX(100%);
-	}
-}
 a {
 	text-decoration: none;
 }
@@ -353,7 +320,24 @@ div .dot {
 	box-shadow: 0 5px 0 #fff, -35px 50px 0 #fff, -70px 95px 0 #fff;
 	animation: loading-step 1s ease-in-out infinite;
 }
+.animation-bg {
+	animation: gradient 5s ease infinite;
+}
 
+@keyframes grandient {
+	0% {
+		background: "linear-gradient(0deg, #722f21 0%, #ee441e 100%)";
+	}
+	33% {
+		background: "linear-gradient(120deg, #722f21 0%, #ee441e 100%)";
+	}
+	67% {
+		background: "linear-gradient(240deg, #722f21 0%, #ee441e 100%)";
+	}
+	100% {
+		background: "linear-gradient(360deg, #722f21 0%, #ee441e 100%)";
+	}
+}
 @keyframes loading-bounce {
 	0% {
 		transform: scale(1, 0.7);
@@ -377,4 +361,14 @@ div .dot {
 		box-shadow: 0 10px 0 #fff, -35px 50px 0 #fff, -70px 90px 0 #fff,
 			-70px 90px 0 rgba(0, 0, 0, 0);
 	}
+}
+
+.hidden-bar::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidden-bar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }

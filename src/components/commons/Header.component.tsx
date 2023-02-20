@@ -139,7 +139,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 					backgroundPosition: "center",
 					backgroundSize: "cover",
 					backgroundImage: {
-						lg: "url('https://diggersworld.io/img/header-bg.png')",
+						lg: "url('/header-bg.png')",
 						xs: "none",
 					},
 				}}

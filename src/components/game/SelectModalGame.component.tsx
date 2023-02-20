@@ -73,7 +73,7 @@ export default function SelectModalGame({
 				}}
 			>
 				<Fade in={open}>
-					<Box sx={style}>
+					<Box sx={style} className="hidden-bar">
 						<Stack
 							direction="row"
 							justifyContent={"center"}
@@ -98,8 +98,7 @@ export default function SelectModalGame({
 							</Typography>
 						</Stack>
 						<Grid container spacing={2}>
-							{myNft ? (
-								myNft?.length >= 1 &&
+							{myNft && myNft?.length > 0 ? (
 								myNft?.map((t, k) => (
 									<Grid
 										onClick={() => handleSelectNft(t)}
@@ -128,7 +127,7 @@ export default function SelectModalGame({
 									direction="row"
 									justifyContent="center"
 									sx={{ width: "100%" }}
-									my={5}
+									my={2}
 								>
 									<Typography align="center" color={"info"}>
 										Empty

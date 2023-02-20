@@ -1,4 +1,4 @@
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Typography, Stack, Pagination } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {
 	allNftListed,
@@ -9,6 +9,7 @@ import { getRarityOfTokenId } from "func/interactNft";
 import { useContext, useEffect, useState } from "react";
 import MarketplaceModalGame from "./MarketplaceModalGame.component";
 import { Address } from "layout/index.layout";
+import Container from "@mui/material/Container";
 
 type NftT = {
 	tokenId: string;
@@ -42,7 +43,6 @@ const Nft = ({ tokenId, setOpenModel, price }: NftT) => {
 		};
 		getfunc();
 	}, [tokenId]);
-	console.log(info);
 
 	return (
 		<>
@@ -161,10 +161,9 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 	}, []);
 
 	return (
-		<>
-			{!loading && (
-				<>
-					{/* <Box my={20}>
+		<Container maxWidth={false}>
+			<>
+				{/* <Box my={20}>
 			<Typography
 				sx={{
 					typography: {
@@ -178,85 +177,106 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 				COMING SOON
 			</Typography>
 		</Box> */}
+				<Stack
+					direction="row"
+					alignItems="center"
+					sx={{
+						overflowX: "auto",
+						"&::-webkit-scrollbar": { display: "none" },
+						msOverflowStyle: "none",
+						scrollbarWidth: "none",
+					}}
+				>
 					<Stack
-						direction="row"
+						direction="column"
 						alignItems="center"
-						sx={{
-							overflowX: "auto",
-							"&::-webkit-scrollbar": { display: "none" },
-							msOverflowStyle: "none",
-							scrollbarWidth: "none",
-						}}
+						justifyContent={"center"}
+						minWidth={100}
 					>
-						<Stack
-							direction="column"
-							alignItems="center"
-							justifyContent={"center"}
-							minWidth={100}
-						>
-							<Typography sx={{ fontFamily: "fantasy" }}>
-								Floor price
-							</Typography>
-							<Typography color="#cb3232">{`${Number(
-								data[0]?.price ?? 0
-							).toLocaleString()}`}</Typography>
-						</Stack>
-						<Stack
-							direction="column"
-							alignItems="center"
-							justifyContent={"center"}
-							minWidth={100}
-						>
-							<Typography sx={{ fontFamily: "fantasy" }}>
-								Total Supply
-							</Typography>
-							<Typography>2000</Typography>
-						</Stack>
-						<Stack
-							direction="column"
-							alignItems="center"
-							justifyContent={"center"}
-							minWidth={100}
-						>
-							<Typography sx={{ fontFamily: "fantasy" }}>
-								Listed
-							</Typography>
-							<Typography color="green">15%</Typography>
-						</Stack>
-					</Stack>
-
-					{data?.length > 0 ? (
-						<Grid container spacing={2} my={1}>
-							{data?.map((t: string, k: number) => {
-								if (t === "0") return;
-								return (
-									<Grid key={t + k} md={4} lg={3}>
-										<Nft
-											tokenId={data[k].tokenId}
-											setOpenModel={setOpenModel}
-											price={data[k].price}
-										/>
-									</Grid>
-								);
-							})}
-						</Grid>
-					) : (
-						<Typography
-							sx={{
-								typography: {
-									md: "h3",
-									xs: "h5",
-									opacity: 0.6,
-									color: "#e04545",
-								},
-							}}
-							align="center"
-						>
-							Empty
+						<Typography sx={{ fontFamily: "fantasy" }}>
+							Floor price
 						</Typography>
-					)}
-				</>
-			)}
+						<Typography color="#cb3232">{`${Number(
+							data?.[0]?.price ?? 0
+						).toLocaleString()}`}</Typography>
+					</Stack>
+					<Stack
+						direction="column"
+						alignItems="center"
+						justifyContent={"center"}
+						minWidth={100}
+					>
+						<Typography sx={{ fontFamily: "fantasy" }}>
+							Total Supply
+						</Typography>
+						<Typography>2000</Typography>
+					</Stack>
+					<Stack
+						direction="column"
+						alignItems="center"
+						justifyContent={"center"}
+						minWidth={120}
+					>
+						<Typography sx={{ fontFamily: "fantasy" }}>
+							Listed
+						</Typography>
+						<Typography color="green">
+							{isNaN((data?.length / 2000) * 100)
+								? 0
+								: (data?.length / 2000) * 100 + "%"}
+						</Typography>
+					</Stack>
+				</Stack>
+				{!loading && (
+					<>
+						{data?.length > 0 ? (
+							<>
+								<Grid container spacing={2} my={1}>
+									{data?.map((t: string, k: number) => {
+										if (t === "0") return;
+										return (
+											<Grid key={t + k} md={4} lg={3}>
+												<Nft
+													tokenId={data[k].tokenId}
+													setOpenModel={setOpenModel}
+													price={data[k].price}
+												/>
+											</Grid>
+										);
+									})}
+								</Grid>
+								{/* <Stack
+									spacing={2}
+									justifyContent={"center"}
+									alignItems={"center"}
+								>
+									<Pagination
+										count={0}
+										variant="outlined"
+										shape="rounded"
+										sx={{ button: { color: "white" } }}
+										color="primary"
+									/>
+								</Stack> */}
+							</>
+						) : (
+							<Typography
+								sx={{
+									typography: {
+										md: "h3",
+										xs: "h5",
+										opacity: 0.6,
+										color: "#e04545",
+									},
+								}}
+								align="center"
+							>
+								Empty
+							</Typography>
+						)}
+					</>
+				)}
+			</>
 			<MarketplaceModalGame
 				owner={openModel?.owner}
 				price={openModel?.price}
@@ -266,7 +286,7 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 				address={address}
 				setNotify={setNotify}
 			/>
-		</>
+		</Container>
 	);
 };
 

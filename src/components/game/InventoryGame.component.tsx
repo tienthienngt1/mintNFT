@@ -62,7 +62,11 @@ const InventoryGame = () => {
 			)}
 			{!loading && (
 				<>
-					<Grid container spacing={2}>
+					<Grid
+						container
+						spacing={2}
+						sx={{ display: "flex", justifyContent: "center" }}
+					>
 						{tokenId && tokenId.length > 0 ? (
 							tokenId?.map((t, k) => (
 								<Grid
@@ -76,12 +80,12 @@ const InventoryGame = () => {
 							))
 						) : (
 							<Typography
+								my={3}
 								sx={{
 									typography: {
 										md: "h3",
 										xs: "h5",
 										opacity: 0.6,
-										color: "#e04545",
 									},
 								}}
 								align="center"

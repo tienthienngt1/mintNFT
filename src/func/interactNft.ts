@@ -58,10 +58,17 @@ export const isAprovedForAll = async (address: string) => {
 };
 
 export const getTotalSupply = async () => {
+	// const web3 = new Web3(
+	// 	new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli")
+	// ); // testnet
 	const web3 = new Web3(
-		new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli")
+		new Web3.providers.HttpProvider(
+			"https://data-seed-prebsc-1-s2.binance.org:8545"
+		)
 	); // testnet
-	// const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443')) // mainet
+	// const web3 = new Web3(
+	// 	new Web3.providers.HttpProvider("https://bsc-dataseed1.binance.org:443")
+	// ); // mainet
 	const contractNft = new web3.eth.Contract(
 		//@ts-ignore
 		NFT_ABI,

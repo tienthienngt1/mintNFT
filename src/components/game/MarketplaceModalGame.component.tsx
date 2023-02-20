@@ -5,7 +5,7 @@ import { Stack, Typography } from "@mui/material";
 import { Nft } from "components/commons/Nft.component";
 import { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { buy, getTurn } from "func/interactGame";
+import { buy, cancel, getTurn } from "func/interactGame";
 import { approveBuy, getBalance } from "func/interactToken";
 
 const style = {
@@ -14,7 +14,7 @@ const style = {
 	left: "50%",
 	transform: "translate(-50%, -50%)",
 	maxHeight: "80vh",
-	bgcolor: "#d1ca66",
+	bgcolor: "#353535",
 	border: "2px solid #eb0808",
 	borderRadius: 4,
 	boxShadow: 24,
@@ -64,23 +64,34 @@ export default function MarketplaceModalGame({
 			return;
 		}
 		setLoadingButton(true);
-		const _approve = await approveBuy(Number(price), address);
-		if (typeof _approve === "string") {
-			setNotify({ display: true, text: _approve, severity: "error" });
-			setLoadingButton(false);
-			return;
-		}
-		if (!_approve) {
-			setLoadingButton(false);
-			return;
-		}
-		const res = await buy(address, tokenId);
-		if (res) {
-			setNotify({
-				display: true,
-				text: "Buy successfully",
-				severity: "success",
-			});
+		if (owner?.toLowerCase() === address?.toLowerCase()) {
+			const _resCancel = await cancel(address, tokenId);
+			if (_resCancel) {
+				setNotify({
+					display: true,
+					text: "Cancel successfully",
+					severity: "success",
+				});
+			}
+		} else {
+			const _approve = await approveBuy(Number(price), address);
+			if (typeof _approve === "string") {
+				setNotify({ display: true, text: _approve, severity: "error" });
+				setLoadingButton(false);
+				return;
+			}
+			if (!_approve) {
+				setLoadingButton(false);
+				return;
+			}
+			const res = await buy(address, tokenId);
+			if (res) {
+				setNotify({
+					display: true,
+					text: "Buy successfully",
+					severity: "success",
+				});
+			}
 		}
 		setLoadingButton(false);
 		handleClose();
@@ -88,9 +99,10 @@ export default function MarketplaceModalGame({
 
 	useEffect(() => {
 		(async () => {
-			if (!address) return;
-			const _balance = await getBalance(address);
-			setBalance(_balance);
+			if (address) {
+				const _balance = await getBalance(address);
+				setBalance(_balance);
+			}
 			if (tokenId) {
 				const _turn = await getTurn(tokenId);
 				setTurn(_turn);
@@ -109,7 +121,11 @@ export default function MarketplaceModalGame({
 				closeAfterTransition
 			>
 				<Fade in={open}>
-					<Box sx={style} width={{ md: 700, xs: 400 }}>
+					<Box
+						className="hidden-bar"
+						sx={style}
+						width={{ md: 700, xs: 400 }}
+					>
 						<>
 							<Stack
 								direction="column"
@@ -203,8 +219,8 @@ export default function MarketplaceModalGame({
 									</Typography>
 								</Stack>
 								<LoadingButton
-									color="error"
-									variant="contained"
+									className="button1"
+									sx={{ p: 1.5 }}
 									onClick={handleBuy}
 									loading={isLoadingButton}
 								>
