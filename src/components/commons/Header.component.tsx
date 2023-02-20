@@ -8,7 +8,6 @@ import {
 	IconButton,
 	Alert,
 } from "@mui/material";
-import ButtonCt from "./ButtonCt.component";
 import { Link } from "react-router-dom";
 import { useEventEth } from "hooks/useEventEth";
 import { connectWallet } from "func/connectWallet";
@@ -16,7 +15,6 @@ import { useMedia } from "react-use";
 import { useState } from "react";
 import { ThreeDotsVertical } from "react-bootstrap-icons";
 import Button1 from "./Button1.component";
-import Container from "@mui/material/Container";
 
 const MenuSmallScreen = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -187,7 +185,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 							</Link>
 						</>
 					)}
-					<Button1
+					{/* <Button1
 						onClick={handleConnect}
 						title={
 							address
@@ -196,7 +194,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 								  )}`
 								: `Connect`
 						}
-					/>
+					/> */}
 					{width && <MenuSmallScreen />}
 				</Stack>
 			</Stack>

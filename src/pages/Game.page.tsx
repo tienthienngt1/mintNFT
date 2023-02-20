@@ -9,7 +9,7 @@ const Game = () => {
 	}, []);
 	return (
 		<>
-			{/* <Box my={20}>
+			<Box my={20}>
 				<Typography
 					sx={{
 						typography: {
@@ -22,9 +22,9 @@ const Game = () => {
 				>
 					COMING SOON
 				</Typography>
-			</Box> */}
+			</Box>
 
-			<MainGame />
+			{/* <MainGame /> */}
 		</>
 	);
 };

@@ -33,44 +33,46 @@ export default function ResultModalGame({
 	value,
 }: ResultModalGameT) {
 	return (
-		<div>
-			<Modal
-				aria-labelledby="transition-modal-title"
-				aria-describedby="transition-modal-description"
-				open={open}
-				onClose={handleClose}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}
-			>
-				<Fade in={open}>
-					<Box sx={style}>
-						<Stack
-							direction="row"
-							justifyContent="center"
-							alignItems="center"
-							sx={{ width: "100%", height: "100%" }}
-							my={5}
-						>
-							<Typography
-								align="center"
-								sx={{
-									typography: {
-										color: "rgb(255,255,255,0.6)",
-									},
-								}}
+		<>
+			{!isNaN(Math.floor(Number(value))) && (
+				<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					open={open}
+					onClose={handleClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}
+				>
+					<Fade in={open}>
+						<Box sx={style}>
+							<Stack
+								direction="row"
+								justifyContent="center"
+								alignItems="center"
+								sx={{ width: "100%", height: "100%" }}
+								my={5}
 							>
-								{`You ${status === "1" ? "lose" : "win"}: `}
-							</Typography>
-							<Typography align="center" color={"error"}>
-								{`+${Math.floor(Number(value)) ?? ""}`}
-							</Typography>
-						</Stack>
-					</Box>
-				</Fade>
-			</Modal>
-		</div>
+								<Typography
+									align="center"
+									sx={{
+										typography: {
+											color: "rgb(255,255,255,0.6)",
+										},
+									}}
+								>
+									{`You ${status === "1" ? "lose" : "win"}: `}
+								</Typography>
+								<Typography align="center" color={"error"}>
+									{`+${Math.floor(Number(value)) ?? ""}`}
+								</Typography>
+							</Stack>
+						</Box>
+					</Fade>
+				</Modal>
+			)}
+		</>
 	);
 }
