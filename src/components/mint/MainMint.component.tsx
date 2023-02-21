@@ -268,7 +268,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 								),
 							}}
 						/>
-						<Stack
+						{/* <Stack
 							direction="row"
 							justifyContent={"center"}
 							sx={{ marginTop: { lg: 10, md: 3 } }}
@@ -281,7 +281,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							>
 								{address ? "Mint" : "Connect Wallet"}
 							</LoadingButton>
-						</Stack>
+						</Stack> */}
 					</Box>
 				</Tween>
 			</Reveal>
