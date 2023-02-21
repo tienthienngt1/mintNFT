@@ -1,9 +1,10 @@
 //request switch chain
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
 export const CHAIN_ID = "0xa4b1"; // edit here
-export const NFT_CONTRACT = "0x501ED18A8706dA98F4F0779B91c9A13ff55d3836";
-export const TOKEN_CONTRACT = "0x0F4B637C0Cc2C8027761fB12BDeFB879Ff3197e5";
+export const NFT_CONTRACT = "0xA99aC6bedcf61299480b29813929860b9aB5b5cb";
+export const TOKEN_CONTRACT = "0xEff1C15Dd81FFe9CB04a898Ba06c7CE871dBDEB6";
 export const GAME_CONTRACT = "0x7B2e4464EB6600F6F2a151e536fE5d0D741987FB";
+
 export const NFT_ABI = [
 	{
 		inputs: [

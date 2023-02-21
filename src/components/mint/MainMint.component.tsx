@@ -199,7 +199,7 @@ const MainMint = ({ setStatus, status }: MainMintT) => {
 							justifyContent="space-between"
 						>
 							<Typography gutterBottom>
-								Price: ... ShibaF
+								Price: 30.000 ShibaF
 							</Typography>
 							<Typography gutterBottom>Max: 3 Nfts</Typography>
 						</Stack>

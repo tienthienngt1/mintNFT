@@ -12,7 +12,7 @@ const Mint = () => {
 	const [status, setStatus] = useState<boolean>(false);
 	return (
 		<>
-			<Box my={20}>
+			{/* <Box my={20}>
 				<Typography
 					sx={{
 						typography: {
@@ -25,8 +25,8 @@ const Mint = () => {
 				>
 					COMING SOON
 				</Typography>
-			</Box>
-			{/* <Stack direction="row" justifyContent={"center"}>
+			</Box> */}
+			<Stack direction="row" justifyContent={"center"}>
 				<Stack
 					direction={{ md: "row", xs: "column-reverse" }}
 					spacing={4}
@@ -56,7 +56,7 @@ const Mint = () => {
 					</Reveal>
 				</Stack>
 			</Stack>
-			<CollectionMint status={status} /> */}
+			<CollectionMint status={status} />
 		</>
 	);
 };
