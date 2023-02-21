@@ -27,8 +27,8 @@ const Mint = () => {
 					COMING SOON
 				</Typography>
 			</Box>
-			{/* 
-			<Stack direction="row" justifyContent={"center"}>
+
+			{/* <Stack direction="row" justifyContent={"center"}>
 				<Stack
 					direction={{ md: "row", xs: "column-reverse" }}
 					spacing={4}

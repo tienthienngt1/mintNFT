@@ -1,27 +1,28 @@
 import { Typography, Box, Stack } from "@mui/material";
 import { Reveal, Tween } from "react-gsap";
 import Grid from "@mui/material/Unstable_Grid2";
+import { Telegram } from "react-bootstrap-icons";
+import Button1 from "components/commons/Button1.component";
+import { Link } from "react-router-dom";
 
 const rarityLable = [
 	{
-		name: "Diodore",
+		name: "Shiba Sensei",
 		desc: "CEO",
-		avatar: "/avatar1.jpg",
-	},
-	{
-		name: "Sylvester",
-		desc: "DESIGNER",
-		avatar: "/avatar2.jpg",
-	},
-	{
-		name: "Atli",
-		desc: "DEVERLOPER",
 		avatar: "/avatar3.jpg",
+		telegram: "https://t.me/senseishib",
 	},
 	{
-		name: "Taras",
+		name: "ShibaFighter Dev",
 		desc: "COO",
-		avatar: "/avatar4.jpg",
+		avatar: "/backgroundLogo.jpg",
+		telegram: "https://t.me/YourFriendlyDev",
+	},
+	{
+		name: "Lucas",
+		desc: "DESIGNER",
+		avatar: "/backgroundLogo.jpg",
+		telegram: "https://t.me/LucasFighter",
 	},
 ];
 const AboutHome = () => {
@@ -89,7 +90,13 @@ const AboutHome = () => {
 											cursor: "pointer",
 										},
 										padding: "10%",
-										paddingTop: "20%",
+										paddingTop: {
+											sm: "15%",
+											md: "15%",
+											xs: "20%",
+											lg: "15%",
+											xl: "15%",
+										},
 										aspectRatio: "295/417",
 									}}
 									p={3}
@@ -108,16 +115,30 @@ const AboutHome = () => {
 											width={"100%"}
 										/>
 									</Box>
-									<Typography
-										align="center"
-										color={"white"}
-										sx={{ paddingTop: 2 }}
-									>
+									<Typography align="center" color={"white"}>
 										{r.name}
 									</Typography>
 									<Typography align="center" color={"white"}>
 										{r.desc}
 									</Typography>
+									<Stack
+										direction="row"
+										justifyContent="center"
+									>
+										<Link to={r.telegram} target="_blank">
+											<Button1
+												title={
+													<Telegram
+														style={{
+															fontSize: 30,
+															color: "#058effdf",
+														}}
+													/>
+												}
+												style={{ padding: 10 }}
+											/>
+										</Link>
+									</Stack>
 								</Box>
 							</Grid>
 						</Tween>

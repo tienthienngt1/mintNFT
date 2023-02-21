@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import MarketplaceModalGame from "./MarketplaceModalGame.component";
 import { Address } from "layout/index.layout";
 import Container from "@mui/material/Container";
+import LoadingMarketplace from "components/commons/LoadingMarketplace.component";
 
 type NftT = {
 	tokenId: string;
@@ -148,17 +149,25 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 			let arr: any = [];
 			const _allListed = await allNftListed();
 			const _allListedPrice = await allNftListedByPrice();
-			_allListed.forEach((a: any, k: number) => {
-				if (a !== "0") {
-					arr.push({ tokenId: a, price: _allListedPrice[k] });
+			for (let i in _allListed) {
+				if (_allListed[i] !== "0") {
+					const _rarity = await getRarityOfTokenId(_allListed[i]);
+					arr.push({
+						tokenId: _allListed[i],
+						price: _allListedPrice[i],
+						rarity: _rarity,
+					});
 				}
-			});
-			setData(
-				arr.sort((a: any, b: any) => Number(a.price) - Number(b.price))
+			}
+			let _dataSort = arr.sort(
+				(a: any, b: any) => Number(a.price) - Number(b.price)
 			);
+			setData(_dataSort);
 			setLoading(false);
 		})();
 	}, []);
+
+	console.log(data);
 
 	return (
 		<Container maxWidth={false}>
@@ -177,6 +186,7 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 				COMING SOON
 			</Typography>
 		</Box> */}
+
 				<Stack
 					direction="row"
 					alignItems="center"
@@ -227,6 +237,7 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 						</Typography>
 					</Stack>
 				</Stack>
+				{loading && <LoadingMarketplace />}
 				{!loading && (
 					<>
 						{data?.length > 0 ? (

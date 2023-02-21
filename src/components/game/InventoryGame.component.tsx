@@ -8,6 +8,7 @@ import InventoryModalGame from "./InventoryModalGame.component";
 import Notify from "components/commons/Nofity.component";
 import { tokenIdListedByOwner } from "func/interactGame";
 import { Nft } from "components/commons/Nft.component";
+import LoadingMarketplace from "components/commons/LoadingMarketplace.component";
 
 const InventoryGame = () => {
 	const { address } = useContext(Address);
@@ -60,6 +61,7 @@ const InventoryGame = () => {
 					Empty
 				</Typography>
 			)}
+			{loading && <LoadingMarketplace />}
 			{!loading && (
 				<>
 					<Grid

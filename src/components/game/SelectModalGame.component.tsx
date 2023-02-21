@@ -9,6 +9,7 @@ import { sortArray } from "func/sortArray";
 import { getMyTokens } from "func/interactNft";
 import { Radio, Stack } from "@mui/material";
 import { Nft } from "components/commons/Nft.component";
+import LoadingMarketplace from "components/commons/LoadingMarketplace.component";
 
 const style = {
 	position: "absolute" as "absolute",
@@ -41,6 +42,7 @@ export default function SelectModalGame({
 	address,
 }: SelectModalGameT) {
 	const [myNft, setMyNft] = useState<string[] | undefined>();
+	const [loading, setLoading] = useState(true);
 
 	const handleSelectNft = (id: string) => {
 		setTokenId(id);
@@ -56,6 +58,7 @@ export default function SelectModalGame({
 			} else {
 				setMyNft(undefined);
 			}
+			setLoading(false);
 		};
 		token();
 	}, [address]);
@@ -97,44 +100,50 @@ export default function SelectModalGame({
 								Inventory
 							</Typography>
 						</Stack>
-						<Grid container spacing={2}>
-							{myNft && myNft?.length > 0 ? (
-								myNft?.map((t, k) => (
-									<Grid
-										onClick={() => handleSelectNft(t)}
-										key={t + k}
-										xs={12}
-										md={4}
-									>
-										<Nft tokenId={t} status={false} />
-										<Stack
-											direction={"row"}
-											justifyContent={"center"}
+						{loading && <LoadingMarketplace />}
+						{!loading && (
+							<Grid container spacing={2}>
+								{myNft && myNft?.length > 0 ? (
+									myNft?.map((t, k) => (
+										<Grid
+											onClick={() => handleSelectNft(t)}
+											key={t + k}
+											xs={12}
+											md={4}
 										>
-											<Radio
-												checked={t === tokenId}
-												sx={{
-													"&.Mui-checked": {
-														color: "red",
-													},
-												}}
-											/>
-										</Stack>
-									</Grid>
-								))
-							) : (
-								<Stack
-									direction="row"
-									justifyContent="center"
-									sx={{ width: "100%" }}
-									my={2}
-								>
-									<Typography align="center" color={"info"}>
-										Empty
-									</Typography>
-								</Stack>
-							)}
-						</Grid>
+											<Nft tokenId={t} status={false} />
+											<Stack
+												direction={"row"}
+												justifyContent={"center"}
+											>
+												<Radio
+													checked={t === tokenId}
+													sx={{
+														"&.Mui-checked": {
+															color: "red",
+														},
+													}}
+												/>
+											</Stack>
+										</Grid>
+									))
+								) : (
+									<Stack
+										direction="row"
+										justifyContent="center"
+										sx={{ width: "100%" }}
+										my={2}
+									>
+										<Typography
+											align="center"
+											color={"info"}
+										>
+											Empty
+										</Typography>
+									</Stack>
+								)}
+							</Grid>
+						)}
 					</Box>
 				</Fade>
 			</Modal>

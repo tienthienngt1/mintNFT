@@ -1,9 +1,9 @@
 //request switch chain
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
 export const CHAIN_ID = "0x61"; // edit here
-export const NFT_CONTRACT = "0x9bC4D7053a5B0c7e4fCc5FC5b09D122feCDEDFa9";
-export const TOKEN_CONTRACT = "0xaa4DE72AadA26762e2f54C051D257Ff68e330596";
-export const GAME_CONTRACT = "0x500219E84589652EA76f169C65124e854dfd4735";
+export const NFT_CONTRACT = "0xCCda3ED9e929A0CE4C43EcA8f925A19bD6C6bc37";
+export const TOKEN_CONTRACT = "0xBB31A9C1211C48B13EA9967B33AEA2Ee7EEae3d7";
+export const GAME_CONTRACT = "0x7B2e4464EB6600F6F2a151e536fE5d0D741987FB";
 export const FAUCET_CONTRACT = "0xe3761E1678f7bA82243D586A466Cee8EeA4E5a1a";
 export const FAUCET_ABI = [
 	{
@@ -1016,7 +1016,6 @@ export const TOKEN_ABI = [
 	},
 	{ stateMutability: "payable", type: "receive" },
 ];
-
 export const GAME_ABI = [
 	{
 		inputs: [
