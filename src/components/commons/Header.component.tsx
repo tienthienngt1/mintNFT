@@ -185,7 +185,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 							</Link>
 						</>
 					)}
-					<Button1
+					{/* <Button1
 						onClick={handleConnect}
 						title={
 							address
@@ -194,7 +194,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 								  )}`
 								: `Connect`
 						}
-					/>
+					/> */}
 					{width && <MenuSmallScreen />}
 				</Stack>
 			</Stack>
