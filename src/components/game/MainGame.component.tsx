@@ -82,7 +82,7 @@ const Nav = ({ alignment, setAlignment }: NavT) => {
 };
 
 const MainGame = () => {
-	const [alignment, setAlignment] = useState("battle");
+	const [alignment, setAlignment] = useState("inventory");
 	const [notify, setNotify] = useState<{
 		display: boolean;
 		text: string;

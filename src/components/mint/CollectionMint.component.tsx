@@ -25,7 +25,9 @@ const CollectionMint = ({ status }: CollectionMintT) => {
 				setTokenId(undefined);
 			}
 		};
-		token();
+		setTimeout(() => {
+			token();
+		}, 2000);
 	}, [address, status]);
 	return (
 		<>

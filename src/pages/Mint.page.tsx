@@ -1,11 +1,10 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
 import CollectionMint from "components/mint/CollectionMint.component";
 import LogoMint from "components/mint/LogoMint.component";
 import MainMint from "components/mint/MainMint.component";
 import { useLayoutEffect, useState } from "react";
 import { Reveal, Tween } from "react-gsap";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+
 const Mint = () => {
 	useLayoutEffect(() => {
 		window.scrollTo(0, 0);
@@ -27,7 +26,6 @@ const Mint = () => {
 					COMING SOON
 				</Typography>
 			</Box>
-
 			{/* <Stack direction="row" justifyContent={"center"}>
 				<Stack
 					direction={{ md: "row", xs: "column-reverse" }}

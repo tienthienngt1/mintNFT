@@ -1,5 +1,5 @@
 import { Box, Typography, Stack, Button } from "@mui/material";
-import { LoadingButton, timelineClasses } from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState, useContext, useEffect } from "react";
 import SelectModalGame from "./SelectModalGame.component";
@@ -24,7 +24,6 @@ import { Clock } from "react-bootstrap-icons";
 import { convertStoH } from "func/convertStoH";
 import Button1 from "components/commons/Button1.component";
 import Container from "@mui/material/Container";
-import { faucet } from "func/interactFaucet";
 
 type ZombieT = {
 	isLoading: boolean[];
@@ -320,24 +319,6 @@ const BattleGame = () => {
 					<Button
 						className="button1"
 						sx={{ p: 1.5, color: "white" }}
-						onClick={async () => {
-							if (!address) return;
-							const res = await faucet(address);
-							if (res) {
-								setNotify({
-									display: true,
-									text: "You got 100,000 ShibaF",
-									severity: "success",
-								});
-								setToggleStatus(!toggleStatus);
-							}
-						}}
-					>
-						Faucet
-					</Button>
-					<Button
-						className="button1"
-						sx={{ p: 1.5, color: "white" }}
 						onClick={handleWithdraw}
 					>
 						Withdraw
@@ -390,13 +371,15 @@ const BattleGame = () => {
 					onClick={handleOpen}
 				/>
 			</Stack>
-			<SelectModalGame
-				open={open}
-				address={address}
-				handleClose={handleClose}
-				setTokenId={setTokenId}
-				tokenId={tokenId}
-			/>
+			{open && (
+				<SelectModalGame
+					open={open}
+					address={address}
+					handleClose={handleClose}
+					setTokenId={setTokenId}
+					tokenId={tokenId}
+				/>
+			)}
 			<ResultModalGame
 				open={resultModel.open}
 				handleClose={handleCloseResultModel}

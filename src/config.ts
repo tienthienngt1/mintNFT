@@ -1,114 +1,9 @@
 //request switch chain
 // BNB mainnet "0x38", BNB testnet "0x61", ETH goerli "0x5", ETH mainnet "0x1", ARB Test "0x66eed", ARB Main "0xa4b1"
-export const CHAIN_ID = "0x61"; // edit here
-export const NFT_CONTRACT = "0xCCda3ED9e929A0CE4C43EcA8f925A19bD6C6bc37";
-export const TOKEN_CONTRACT = "0xBB31A9C1211C48B13EA9967B33AEA2Ee7EEae3d7";
+export const CHAIN_ID = "0xa4b1"; // edit here
+export const NFT_CONTRACT = "0x501ED18A8706dA98F4F0779B91c9A13ff55d3836";
+export const TOKEN_CONTRACT = "0x0F4B637C0Cc2C8027761fB12BDeFB879Ff3197e5";
 export const GAME_CONTRACT = "0x7B2e4464EB6600F6F2a151e536fE5d0D741987FB";
-export const FAUCET_CONTRACT = "0xe3761E1678f7bA82243D586A466Cee8EeA4E5a1a";
-export const FAUCET_ABI = [
-	{
-		inputs: [
-			{
-				internalType: "address",
-				name: "_token",
-				type: "address",
-			},
-		],
-		stateMutability: "nonpayable",
-		type: "constructor",
-	},
-	{
-		anonymous: false,
-		inputs: [
-			{
-				indexed: true,
-				internalType: "address",
-				name: "previousOwner",
-				type: "address",
-			},
-			{
-				indexed: true,
-				internalType: "address",
-				name: "newOwner",
-				type: "address",
-			},
-		],
-		name: "OwnershipTransferred",
-		type: "event",
-	},
-	{
-		inputs: [
-			{
-				internalType: "uint256",
-				name: "_amount",
-				type: "uint256",
-			},
-		],
-		name: "depositPool",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "faucetTest",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "address",
-				name: "",
-				type: "address",
-			},
-		],
-		name: "isFaucet",
-		outputs: [
-			{
-				internalType: "bool",
-				name: "",
-				type: "bool",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "owner",
-		outputs: [
-			{
-				internalType: "address",
-				name: "",
-				type: "address",
-			},
-		],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
-		inputs: [],
-		name: "renounceOwnership",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [
-			{
-				internalType: "address",
-				name: "newOwner",
-				type: "address",
-			},
-		],
-		name: "transferOwnership",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-];
 export const NFT_ABI = [
 	{
 		inputs: [
@@ -409,6 +304,13 @@ export const NFT_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		name: "setPublicSale",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
 		inputs: [
 			{ internalType: "uint256", name: "_startTime", type: "uint256" },
 			{ internalType: "uint256", name: "_endTime", type: "uint256" },
@@ -516,6 +418,7 @@ export const NFT_ABI = [
 		type: "function",
 	},
 ];
+
 export const TOKEN_ABI = [
 	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
 	{
@@ -1016,6 +919,7 @@ export const TOKEN_ABI = [
 	},
 	{ stateMutability: "payable", type: "receive" },
 ];
+
 export const GAME_ABI = [
 	{
 		inputs: [

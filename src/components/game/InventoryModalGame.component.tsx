@@ -12,6 +12,7 @@ import {
 } from "func/interactNft";
 import { LoadingButton } from "@mui/lab";
 import { cancel, isListByTokenId, sell } from "func/interactGame";
+import LoadingMarketplace from "components/commons/LoadingMarketplace.component";
 
 const style = {
 	position: "absolute" as "absolute",
@@ -133,8 +134,8 @@ export default function InvetoryModalGame({
 				const _isListed = await isListByTokenId(tokenId);
 				setListed(_isListed);
 			}
+			setLoading(false);
 		})();
-		setLoading(false);
 	}, [address, tokenId]);
 
 	if (!tokenId) return <></>;
@@ -157,7 +158,9 @@ export default function InvetoryModalGame({
 						sx={style}
 						width={{ md: 700, xs: 400 }}
 					>
-						{!loading && (
+						{loading ? (
+							<LoadingMarketplace />
+						) : (
 							<>
 								<Stack
 									direction="column"

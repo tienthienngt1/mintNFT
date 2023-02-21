@@ -267,6 +267,32 @@ const IntroHome = () => {
 					</Stack>
 				</Grid>
 			</Grid>
+			<Reveal>
+				<Tween
+					from={{
+						opacity: 0,
+						y: -50,
+					}}
+					to={{
+						opacity: 1,
+						y: 0,
+					}}
+					delay={0.5}
+				>
+					<Stack
+						direction="column"
+						justifyContent={"center"}
+						alignItems={"center"}
+					>
+						<Link
+							to="https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0xEff1C15Dd81FFe9CB04a898Ba06c7CE871dBDEB6&chainId=42161"
+							target="_blank"
+						>
+							<Button1 title={"Buy On Sushi"} />
+						</Link>
+					</Stack>
+				</Tween>
+			</Reveal>
 		</>
 	);
 };

@@ -1,14 +1,47 @@
-import { Stack, Typography } from "@mui/material";
+import {
+	Checkbox,
+	FormControlLabel,
+	FormGroup,
+	Stack,
+	Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { getMyTokens } from "func/interactNft";
 import { sortArray } from "func/sortArray";
 import { Address } from "layout/index.layout";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import InventoryModalGame from "./InventoryModalGame.component";
 import Notify from "components/commons/Nofity.component";
 import { tokenIdListedByOwner } from "func/interactGame";
 import { Nft } from "components/commons/Nft.component";
 import LoadingMarketplace from "components/commons/LoadingMarketplace.component";
+
+const listFilter = [
+	{
+		label: "All",
+		value: "all",
+	},
+	{
+		label: "Common",
+		value: "1",
+	},
+	{
+		label: "Uncommon",
+		value: "2",
+	},
+	{
+		label: "Rare",
+		value: "3",
+	},
+	{
+		label: "Ultrarare",
+		value: "4",
+	},
+	{
+		label: "Epic",
+		value: "5",
+	},
+];
 
 const InventoryGame = () => {
 	const { address } = useContext(Address);
@@ -19,6 +52,13 @@ const InventoryGame = () => {
 	const [loading, setLoading] = useState(true);
 	const [isOpenModal, setOpenModal] = useState(false);
 	const [status, setStatus] = useState(false);
+	const [filterRarity, setFilterRarity] = useState<string[]>([
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+	]);
 
 	const [notify, setNotify] = useState<{
 		display: boolean;
@@ -37,6 +77,7 @@ const InventoryGame = () => {
 			const res = await getMyTokens(address);
 			const _tokenIdListed = await tokenIdListedByOwner(address);
 			const token = res.concat(_tokenIdListed);
+
 			setTokenId(sortArray(token));
 
 			setLoading(false);
@@ -47,7 +88,7 @@ const InventoryGame = () => {
 
 	return (
 		<>
-			{!address && (
+			{!address ? (
 				<Typography
 					sx={{
 						typography: {
@@ -60,10 +101,22 @@ const InventoryGame = () => {
 				>
 					Empty
 				</Typography>
-			)}
-			{loading && <LoadingMarketplace />}
-			{!loading && (
+			) : loading ? (
+				<LoadingMarketplace />
+			) : (
 				<>
+					<FormGroup row defaultValue={"all"} sx={{ m: 2 }}>
+						{listFilter.map((a) => (
+							<FormControlLabel
+								key={a.value}
+								checked
+								control={<Checkbox color="error" />}
+								label={a.label}
+								value={a.value}
+								sx={{ path: { fill: "#f73403dd" } }}
+							/>
+						))}
+					</FormGroup>
 					<Grid
 						container
 						spacing={2}
@@ -71,14 +124,15 @@ const InventoryGame = () => {
 					>
 						{tokenId && tokenId.length > 0 ? (
 							tokenId?.map((t, k) => (
-								<Grid
-									key={t + k}
-									md={4}
-									lg={3}
-									onClick={handleSelect(t)}
-								>
-									<Nft tokenId={t} status={status} />
-								</Grid>
+								<Fragment key={t + k}>
+									<Grid
+										md={4}
+										lg={3}
+										onClick={handleSelect(t)}
+									>
+										<Nft tokenId={t} status={status} />
+									</Grid>
+								</Fragment>
 							))
 						) : (
 							<Typography
@@ -98,16 +152,17 @@ const InventoryGame = () => {
 					</Grid>
 				</>
 			)}
-
-			<InventoryModalGame
-				tokenId={tokenIdSelected}
-				open={isOpenModal}
-				handleClose={() => setOpenModal(false)}
-				address={address}
-				setNotify={setNotify}
-				setStatus={setStatus}
-				status={status}
-			/>
+			{isOpenModal && (
+				<InventoryModalGame
+					tokenId={tokenIdSelected}
+					open={isOpenModal}
+					handleClose={() => setOpenModal(false)}
+					address={address}
+					setNotify={setNotify}
+					setStatus={setStatus}
+					status={status}
+				/>
+			)}
 			<Notify
 				display={notify.display}
 				text={notify.text}

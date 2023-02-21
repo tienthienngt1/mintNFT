@@ -123,7 +123,7 @@ const Header = ({ setAddress, address }: HeaderT) => {
 					}}
 					align="center"
 				>
-					Contract SHIBAF: Coming soon...
+					Contract SHIBAF: 0xEff1C15Dd81FFe9CB04a898Ba06c7CE871dBDEB6
 				</Typography>
 			</Alert>
 
