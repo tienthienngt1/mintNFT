@@ -108,19 +108,19 @@ export default function InvetoryModalGame({
 		return;
 
 		//=============
-		if (!address) return;
-		setLoadingButton(true);
-		if (tokenId) {
-			const res = await cancel(address, tokenId);
-			setNotify({
-				display: true,
-				text: res ? "Cancel successfully" : "error",
-				severity: res ? "success" : "error",
-			});
-		}
-		handleClose();
-		setStatus(!status);
-		setLoadingButton(false);
+		// if (!address) return;
+		// setLoadingButton(true);
+		// if (tokenId) {
+		// 	const res = await cancel(address, tokenId);
+		// 	setNotify({
+		// 		display: true,
+		// 		text: res ? "Cancel successfully" : "error",
+		// 		severity: res ? "success" : "error",
+		// 	});
+		// }
+		// handleClose();
+		// setStatus(!status);
+		// setLoadingButton(false);
 	};
 
 	const handleApproval = async () => {
