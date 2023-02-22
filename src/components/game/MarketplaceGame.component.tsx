@@ -167,8 +167,6 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 		})();
 	}, []);
 
-	console.log(data);
-
 	return (
 		<Container maxWidth={false}>
 			<>
@@ -240,7 +238,7 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 				{loading && <LoadingMarketplace />}
 				{!loading && (
 					<>
-						{data?.length > 0 ? (
+						{/* {data?.length > 0 ? (
 							<>
 								<Grid container spacing={2} my={1}>
 									{data?.map((t: string, k: number) => {
@@ -256,19 +254,6 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 										);
 									})}
 								</Grid>
-								{/* <Stack
-									spacing={2}
-									justifyContent={"center"}
-									alignItems={"center"}
-								>
-									<Pagination
-										count={0}
-										variant="outlined"
-										shape="rounded"
-										sx={{ button: { color: "white" } }}
-										color="primary"
-									/>
-								</Stack> */}
 							</>
 						) : (
 							<Typography
@@ -284,7 +269,20 @@ const MarketplaceGame = ({ setNotify }: MkPlaceT) => {
 							>
 								Empty
 							</Typography>
-						)}
+						)} */}
+						<Typography
+							sx={{
+								typography: {
+									md: "h3",
+									xs: "h5",
+									opacity: 0.6,
+									color: "#e04545",
+								},
+							}}
+							align="center"
+						>
+							Coming soon...
+						</Typography>
 					</>
 				)}
 			</>

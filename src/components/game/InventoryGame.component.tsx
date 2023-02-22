@@ -63,7 +63,7 @@ const InventoryGame = () => {
 	const [notify, setNotify] = useState<{
 		display: boolean;
 		text: string;
-		severity: "error" | "success";
+		severity: "error" | "success" | "info";
 	}>({ display: false, text: "", severity: "error" });
 
 	const handleSelect = (tokenIdSelected_: string) => () => {
@@ -105,7 +105,7 @@ const InventoryGame = () => {
 				<LoadingMarketplace />
 			) : (
 				<>
-					<FormGroup row defaultValue={"all"} sx={{ m: 2 }}>
+					{/* <FormGroup row defaultValue={"all"} sx={{ m: 2 }}>
 						{listFilter.map((a) => (
 							<FormControlLabel
 								key={a.value}
@@ -116,7 +116,7 @@ const InventoryGame = () => {
 								sx={{ path: { fill: "#f73403dd" } }}
 							/>
 						))}
-					</FormGroup>
+					</FormGroup> */}
 					<Grid
 						container
 						spacing={2}

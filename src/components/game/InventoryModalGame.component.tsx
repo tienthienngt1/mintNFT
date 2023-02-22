@@ -37,7 +37,7 @@ type InvetoryModalT = {
 		React.SetStateAction<{
 			display: boolean;
 			text: string;
-			severity: "error" | "success";
+			severity: "error" | "success" | "info";
 		}>
 	>;
 	setStatus: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,6 +63,17 @@ export default function InvetoryModalGame({
 	const handle = async () => {
 		if (!address || !tokenId) return;
 		if (!value) return;
+		if (alignment === "sell") {
+			//=============
+			setNotify({
+				display: true,
+				text: "Marketplace coming soon",
+				severity: "info",
+			});
+			return;
+
+			//=============
+		}
 		setLoadingButton(true);
 		if (alignment === "sell") {
 			const res = await sell(address, tokenId, value);
@@ -88,6 +99,15 @@ export default function InvetoryModalGame({
 	};
 
 	const handleCancel = async () => {
+		//=============
+		setNotify({
+			display: true,
+			text: "Marketplace coming soon",
+			severity: "info",
+		});
+		return;
+
+		//=============
 		if (!address) return;
 		setLoadingButton(true);
 		if (tokenId) {
@@ -104,6 +124,15 @@ export default function InvetoryModalGame({
 	};
 
 	const handleApproval = async () => {
+		//=============
+		setNotify({
+			display: true,
+			text: "Marketplace coming soon",
+			severity: "info",
+		});
+		return;
+
+		//=============
 		if (!value) {
 			setNotify({
 				display: true,
@@ -256,6 +285,10 @@ export default function InvetoryModalGame({
 														loading={
 															isLoadingButton
 														}
+														sx={{
+															color: "white",
+															p: 1.5,
+														}}
 														className="button1"
 														disabled={isApprovalAll}
 													>
@@ -269,7 +302,10 @@ export default function InvetoryModalGame({
 														p: 1.5,
 													}}
 													loading={isLoadingButton}
-													disabled={!isApprovalAll}
+													disabled={
+														!isApprovalAll &&
+														alignment === "sell"
+													}
 													className="button1"
 												>
 													{alignment === "sell"

@@ -3,7 +3,7 @@ import { Snackbar, Alert } from "@mui/material";
 type NotifyT = {
 	display?: boolean;
 	text?: string;
-	severity?: "success" | "error";
+	severity?: "success" | "error" | "info";
 	handleClose: () => void;
 };
 

@@ -3,7 +3,7 @@
 export const CHAIN_ID = "0xa4b1"; // edit here
 export const NFT_CONTRACT = "0xA99aC6bedcf61299480b29813929860b9aB5b5cb";
 export const TOKEN_CONTRACT = "0xEff1C15Dd81FFe9CB04a898Ba06c7CE871dBDEB6";
-export const GAME_CONTRACT = "0x7B2e4464EB6600F6F2a151e536fE5d0D741987FB";
+export const GAME_CONTRACT = "0x1BC7a5cb0bA4772F11f5Fb91A91190e972190412";
 
 export const NFT_ABI = [
 	{
@@ -1153,13 +1153,6 @@ export const GAME_ABI = [
 	{
 		inputs: [],
 		name: "withdraw",
-		outputs: [],
-		stateMutability: "nonpayable",
-		type: "function",
-	},
-	{
-		inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
-		name: "withdrawNft",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
